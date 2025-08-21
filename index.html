@@ -41,7 +41,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100.5%;
             object-fit: cover;
             z-index: 0;
         }
@@ -377,7 +377,8 @@
 
             function setVideoSource() {
                 if (window.innerWidth <= 768) {
-                    source.src = './video/main-mobile.mp4';
+                    //source.src = './video/main-mobile.mp4';
+                    source.src = './video/main.mp4';
                 } else {
                     source.src = './video/main.mp4';
                 }
