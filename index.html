@@ -13,7 +13,6 @@
             padding: 0;
             /* font-family: Arial, sans-serif; */
             font-family: 'Object Sans', sans-serif;
-
         }
 
         .container {
@@ -23,17 +22,17 @@
         }
 
         .left {
-            background-color: black;
-            color: white;
-            width: 50%;
-            padding: 40px;
+            background-color: #000000;
+            color: #ffffff;
+            width: calc((100% / 3));
+            padding: 34px 40px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
         }
 
         .right {
-            width: 50%;
+            width: calc((100% / 3) * 2);
             background-image: url('./img/main.png');
             background-size: cover;
             background-position: center;
@@ -44,38 +43,129 @@
             display: flex;
             align-items: center;
             font-size: 14px;
-            margin-bottom: 60px;
+            color: #757575;
+            gap: 14px;
         }
 
-        .header-left i {
-            margin-right: 10px;
+        .header-left p {
+            font-weight: 400;
+            font-style: normal;
+            font-size: 10px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 0;
+        }
+
+        .header-left span {
+            font-weight: 200;
+            font-style: oblique;
+            font-size: 10px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            text-transform: uppercase;
         }
 
         .header-right {
             position: absolute;
-            top: 40px;
-            right: 40px;
-            color: #333;
-            font-size: 14px;
+            top: 28px;
+            right: 28px;
+            color: #ffffff;
             text-transform: uppercase;
             text-align: right;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 10px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: middle;
             z-index: 1;
         }
 
         .footer-right {
             position: absolute;
-            bottom: 40px;
-            right: 40px;
-            color: white;
+            bottom: 28px;
+            right: 28px;
+            color: #ffffff;
             font-size: 14px;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 10px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: middle;
             z-index: 1;
         }
 
+        .mobile-title {
+            display: none;
+        }
+
         h1 {
+            font-weight: 400;
+            font-style: normal;
+            font-size: 20px;
+            line-height: 110%;
+            letter-spacing: 0;
+            vertical-align: middle;
             text-transform: uppercase;
-            font-size: 36px;
-            line-height: 1.2;
-            margin: 0 0 40px 0;
+            margin-bottom: 46px;
+            margin-top: auto;
+        }
+
+        h1 span {
+            font-weight: 200;
+            font-style: oblique;
+            font-size: 20px;
+            line-height: 110%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+
+        h1 span:first-of-type {
+            transform: translateX(165px);
+            display: inline-block;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .headphones {
+            background-image: url('/img/headphones.svg');
+        }
+
+        .options li:nth-child(1) .number {
+            background-image: url('/img/1.svg');
+        }
+
+        .options li:nth-child(2) .number {
+            background-image: url('/img/2.svg');
+        }
+
+        .options li:nth-child(3) .number {
+            background-image: url('/img/3.svg');
+        }
+
+        .options li:nth-child(4) .number {
+            background-image: url('/img/4.svg');
+        }
+
+        .options li:nth-child(5) .number {
+            background-image: url('/img/5.svg');
+        }
+
+        .options li:nth-child(6) .number {
+            background-image: url('/img/6.svg');
         }
 
         .options {
@@ -85,15 +175,29 @@
         }
 
         .options li {
-            font-size: 18px;
-            margin-bottom: 30px;
-            line-height: 1.5;
+            margin-bottom: 15px;
         }
 
-        .options li span {
-            font-weight: bold;
-            margin-right: 5px;
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
         }
+
+        .option p {
+            margin: 0;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 12px;
+            line-height: 120%;
+            letter-spacing: 0;
+        }
+
+        .options .option.inactive {
+            filter: brightness(0.46);
+        }
+
 
         @media (max-width: 768px) {
             .container {
@@ -103,36 +207,81 @@
 
             .left {
                 width: 100%;
-                height: 70vh;
+                height: 50vh;
                 padding: 20px;
             }
 
             .right {
                 width: 100%;
-                height: 30vh;
+                height: 50vh;
             }
 
             .header-left {
-                margin-bottom: 30px;
+                position: absolute;
+                top: 25px;
+                left: 28px;
+                z-index: 1;
+                color: #ffffff;
+            }
+
+            .header-left {
+                gap: 8px;
+            }
+
+            .header-left p,
+            .header-left span,
+            .header-right {
+                font-size: 6px;
             }
 
             .header-right {
-                top: 20px;
-                right: 20px;
+                top: 25px;
+                right: 28px;
             }
 
             .footer-right {
                 bottom: 20px;
-                right: 20px;
+                right: 50%;
+                transform: translateX(50%);
             }
 
-            h1 {
-                font-size: 24px;
+            .desktop-title {
+                display: none;
+            }
+
+            .mobile-title {
+                display: block;
+            }
+
+            h1,
+            h1 span {
+                font-size: 12px;
+                margin-top: 0;
+                margin-bottom: 16px;
+            }
+
+            h1 span:first-of-type {
+                padding-left: 90px;
+                display: inline;
+            }
+
+            .icon {
+                width: 16px;
+                height: 16px;
+            }
+
+            .headphones {
+                width: 11px;
+                height: 11px;
+                background-image: url('/img/headphones_w.svg');
             }
 
             .options li {
-                font-size: 16px;
-                margin-bottom: 20px;
+                margin-bottom: 12px;
+            }
+
+            .option p {
+                font-size: 10px;
             }
         }
     </style>
@@ -142,17 +291,43 @@
     <div class="container">
         <div class="left">
             <div class="header-left">
-                <i class="fas fa-headphones"></i>
-                для лучшего погружения в себя наденьте наушники
+                <div class="icon headphones"></div>
+                <p>для лучшего погружения<br>в себя <span>наденьте наушники</span></p>
             </div>
-            <h1>При постановке<br>целей<br>команде вы:</h1>
+            <h1 class="desktop-title">
+                При постановке<br>
+                <span>целей</span><br>
+                команде <span>вы:</span>
+            </h1>
+            <h1 class="mobile-title">
+                При постановке<br>
+                <span>целей</span> команде <span>вы:</span>
+            </h1>
             <ul class="options">
-                <li><span>1</span> Разбиваю цель на четкие задачи<br>с дедлайнами и метриками</li>
-                <li><span>2</span> Ставлю амбициозную цель<br>и транслирую команде</li>
-                <li><span>3</span> Генерю разные варианты достижения цели<br>и выбираю наиболее нестандартный.</li>
-                <li><span>4</span> Обсуждаю с каждым, как цель<br>связана с их личным развитием</li>
-                <li><span>5</span> Убеждаюсь, что все понимают цель одинаково<br>и готовы её реализовывать.</li>
-                <li><span>6</span> Показываю, как эта цель связана с миссией<br>компании и ведёт нас к ее реализации.
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p>Разбиваю цель на четкие задачи<br>с дедлайнами и метриками</p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p>Ставлю амбициозную цель<br>и транслирую команде</p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p>Генерю разные варианты достижения цели<br>и выбираю наиболее нестандартный.</p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p>Обсуждаю с каждым, как цель<br>связана с их личным развитием</p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p>Убеждаюсь, что все понимают цель одинаково<br>и готовы её реализовывать.</p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p>Показываю, как эта цель связана с миссией<br>компании и ведёт нас к ее реализации.</p>
+                </li>
                 </li>
             </ul>
         </div>
@@ -161,6 +336,17 @@
         <div class="header-right">by setters<br>education team</div>
         <div class="footer-right">1/14</div>
     </div>
+    <script>
+        document.querySelectorAll('.options .option').forEach(option => {
+            option.addEventListener('click', function () {
+                document.querySelectorAll('.options .option').forEach(o => {
+                    o.classList.add('inactive');
+                });
+                this.classList.remove('inactive');
+            });
+        });
+
+    </script>
 </body>
 
 </html>
