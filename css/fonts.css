@@ -75,6 +75,7 @@
     font-display: swap;
 }
 
+/**/
 @font-face {
     font-family: 'ObjectSans';
     src: url('../fonts/ObjectSans-LightSlanted.eot');
@@ -108,6 +109,7 @@
     font-display: swap;
 }
 
+/**/
 @font-face {
     font-family: 'ObjectSans';
     src: url('../fonts/ObjectSans-Regular.eot');
