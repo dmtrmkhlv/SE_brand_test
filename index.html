@@ -25,6 +25,10 @@
 
         .left {
             background-color: #000000;
+            background-image: url('./img/noise.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
             color: #ffffff;
             width: calc((100% / 3));
             padding: 34px 40px;
@@ -249,6 +253,50 @@
             display: none !important;
         }
 
+        .button-next {
+            appearance: none;
+            border: none;
+            background: transparent;
+            margin: 0;
+            padding: 0;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+            outline: none;
+
+            max-width: 197px;
+            min-height: 20px;
+            border-radius: 10px;
+            visibility: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            text-transform: uppercase;
+            background: transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .button-next:active {
+            filter: brightness(0.46);
+            transition: filter 0.2s;
+        }
+
+
+        .button-next p {
+            margin: 0;
+            font-weight: 300;
+            font-style: oblique;
+            font-size: 12px;
+            line-height: 1.2;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            vertical-align: middle;
+            padding-top: 3px;
+        }
+
 
         @media (max-width: 768px) {
             .container {
@@ -294,8 +342,21 @@
 
             .footer-right {
                 bottom: 20px;
-                right: 50%;
-                transform: translateX(50%);
+                left: 20px;
+            }
+
+            .button-next {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                width: 155px;
+                height: 16px;
+                border-radius: 16px;
+            }
+
+            .button-next p {
+                font-size: 9px;
+                padding-top: 3px;
             }
 
             .desktop-title {
@@ -386,6 +447,9 @@
                     <p>Показываю, как эта цель связана с миссией<br>компании и ведёт нас к ее реализации.</p>
                 </li>
             </ul>
+            <button id="buttonNext" class="button-next">
+                <p>к следующему вопросу ⟶</p>
+            </button>
         </div>
         <div class="right">
             <img src="./img/main1.png" alt="Закат" class="bg-poster">
@@ -402,6 +466,7 @@
             const video = document.querySelector('.bg-video');
             const poster = document.querySelector('.bg-poster');
             const source = video.querySelector('source');
+
 
             function setVideoSource() {
                 if (window.innerWidth <= 768) {
@@ -448,8 +513,10 @@
             video.play();
             //this.style.display = 'none';
         });
+        const buttonNext = document.getElementById('buttonNext');
         document.querySelectorAll('.options .option').forEach(option => {
             option.addEventListener('click', function () {
+                buttonNext.style.visibility = 'visible';
                 document.querySelectorAll('.options .option').forEach(o => {
                     o.classList.add('inactive');
                 });
