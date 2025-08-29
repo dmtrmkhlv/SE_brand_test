@@ -301,13 +301,29 @@
         }
 
         .button-next::before {
-            content: "⟶";
+            content: "";
+            background: #ffffff;
+            width: 15px;
+            height: 1px;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             color: #ffffff;
             right: 10px;
             font-size: 16px;
+        }
+
+        .button-next::after {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 1px;
+            border-top: 1px solid #ffffff;
+            border-right: 1px solid #ffffff;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            right: 10px;
         }
 
         .button-next:active {
@@ -331,7 +347,10 @@
         }
 
         .button-next span {
-            opacity: 0
+            opacity: 0;
+            display: inline-block;
+            padding: 0;
+            margin: 0;
         }
 
 
@@ -404,6 +423,10 @@
             .button-next::before {
                 right: 5px;
                 font-size: 12px;
+            }
+
+            .button-next::after {
+                right: 5px;
             }
 
             .desktop-title {
