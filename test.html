@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SE_brand_test</title>
+    <link rel="stylesheet" href="./css/fonts.css">
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'ObjectSans', sans-serif;
+            background-color: #000000;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .left {
+            background-color: #000000;
+            background-image: url('./img/noise.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #ffffff;
+            width: calc((100% / 3));
+            padding: 34px 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right {
+            width: calc((100% / 3) * 2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-poster {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100.5%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 1;
+        }
+
+        .bg-poster.inactive {
+            opacity: 1;
+        }
+
+        .bg-video {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 1px);
+            object-fit: cover;
+            z-index: 0;
+            /*pointer-events: none;*/
+            opacity: 0;
+        }
+
+        .bg-video.active {
+            opacity: 1;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #757575;
+            gap: 14px;
+            user-select: none;
+        }
+
+        .header-left p {
+            font-weight: 400;
+            font-style: normal;
+            font-size: 10px;
+            font-size: 14px;
+            font-size: 12px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            text-transform: uppercase;
+            padding: 0;
+            margin: 0;
+        }
+
+        .header-left span {
+            font-weight: 300;
+            font-style: oblique;
+            font-size: 10px;
+            font-size: 14px;
+            font-size: 12px;
+
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+
+        .header-right {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-align: right;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 10px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            z-index: 1;
+            user-select: none;
+        }
+
+        .footer-right {
+            position: absolute;
+            bottom: 28px;
+            right: 28px;
+            color: #ffffff;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 10px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            z-index: 1;
+            user-select: none;
+        }
+
+        .mobile-title {
+            display: none;
+        }
+
+        h1 {
+            font-weight: 400;
+            font-style: normal;
+            font-size: 20px;
+            font-size: 28px;
+            font-size: 24px;
+            line-height: 110%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            text-transform: uppercase;
+            margin-bottom: 46px;
+            margin-top: auto;
+            user-select: none;
+        }
+
+        h1 span {
+            font-weight: 200;
+            font-style: oblique;
+            font-size: 20px;
+            font-size: 28px;
+            font-size: 24px;
+            line-height: 110%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+
+        h1 span:first-of-type {
+            transform: translateX(165px);
+            transform: translateX(235px);
+            transform: translateX(185px);
+
+            display: inline-block;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            width: 28px;
+            height: 28px;
+            min-width: 20px;
+            min-height: 20px;
+            display: inline-block;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .headphones {
+            background-image: url('./img/headphones.svg');
+            transform: translateY(-1px);
+            cursor: pointer;
+        }
+
+        .options li:nth-child(1) .number {
+            background-image: url('./img/1.svg');
+        }
+
+        .options li:nth-child(2) .number {
+            background-image: url('./img/2.svg');
+        }
+
+        .options li:nth-child(3) .number {
+            background-image: url('./img/3.svg');
+        }
+
+        .options li:nth-child(4) .number {
+            background-image: url('./img/4.svg');
+        }
+
+        .options li:nth-child(5) .number {
+            background-image: url('./img/5.svg');
+        }
+
+        .options li:nth-child(6) .number {
+            background-image: url('./img/6.svg');
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-bottom: 40px;
+        }
+
+        .options li {
+            margin-bottom: 15px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .option p {
+            margin: 0;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 12px;
+            font-size: 16px;
+            font-size: 14px;
+            line-height: 120%;
+            letter-spacing: 0;
+        }
+
+        .options .option.inactive {
+            filter: brightness(0.46);
+        }
+
+        .bg-video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        .bg-video::-webkit-media-controls-enclosure {
+            display: none !important;
+        }
+
+        .bg-video::-webkit-media-controls-panel {
+            display: none !important;
+        }
+
+        .button-next {
+            appearance: none;
+            border: none;
+            background: transparent;
+            margin: 0;
+            padding: 0;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+            outline: none;
+
+            max-width: fit-content;
+            min-width: 197px;
+            min-height: 20px;
+            border-radius: 20px;
+            visibility: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            text-transform: uppercase;
+            background: transparent;
+            transition: border-color 0.2s, color 0.2s;
+            padding: 0 10px;
+
+            position: relative;
+        }
+
+        .button-next::before {
+            content: "";
+            background: #ffffff;
+            width: 15px;
+            height: 1px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffffff;
+            right: 10px;
+            font-size: 16px;
+        }
+
+        .button-next::after {
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-radius: 1px;
+            border-top: 1px solid #ffffff;
+            border-right: 1px solid #ffffff;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            right: 10px;
+        }
+
+        .button-next:active {
+            filter: brightness(0.46);
+            transition: filter 0.2s;
+        }
+
+
+        .button-next p {
+            margin: 0;
+            font-weight: 300;
+            font-style: oblique;
+            font-size: 12px;
+            font-size: 16px;
+            font-size: 14px;
+            line-height: 1.2;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            vertical-align: middle;
+            padding-top: 3px;
+        }
+
+        .button-next span {
+            opacity: 0;
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                padding: 0;
+                flex-flow: column-reverse;
+                height: 100dvh;
+            }
+
+            .left {
+                width: 100%;
+                height: 50dvh;
+                height: auto;
+                padding: 20px;
+            }
+
+            .right {
+                width: 100%;
+                height: 50dvh;
+            }
+
+            .header-left {
+                position: absolute;
+                top: 25px;
+                left: 28px;
+                z-index: 1;
+                color: #ffffff;
+            }
+
+            .header-left {
+                gap: 8px;
+            }
+
+            .header-left p,
+            .header-left span,
+            .header-right {
+                font-size: 6px;
+                font-size: 8px;
+                font-size: 7px;
+                line-height: 1;
+            }
+
+            .header-right {
+                top: 25px;
+                right: 28px;
+            }
+
+            .footer-right {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .button-next {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                width: 155px;
+                min-width: 165px;
+                height: 16px;
+                border-radius: 16px;
+            }
+
+            .button-next p {
+                font-size: 9px;
+                padding-top: 3px;
+            }
+
+            .button-next::before {
+                right: 5px;
+                font-size: 12px;
+            }
+
+            .button-next::after {
+                right: 5px;
+            }
+
+            .desktop-title {
+                display: none;
+            }
+
+            .mobile-title {
+                display: block;
+            }
+
+            h1,
+            h1 span {
+                font-size: 12px;
+                font-size: 14px;
+                font-size: 13px;
+                margin-top: 0;
+                margin-bottom: 16px;
+            }
+
+            h1 span:first-of-type {
+                padding-left: 90px;
+                padding-left: 110px;
+                padding-left: 100px;
+                display: inline;
+            }
+
+            .icon {
+                width: 16px;
+                height: 16px;
+                width: 20px;
+                height: 20px;
+                min-width: 16px;
+                min-height: 16px;
+            }
+
+            .headphones {
+                width: 11px;
+                height: 11px;
+                min-width: 11px;
+                min-height: 11px;
+                background-image: url('./img/headphones_w.svg');
+            }
+
+            .options li {
+                margin-bottom: 12px;
+            }
+
+            .option p {
+                font-size: 10px;
+                font-size: 12px;
+                font-size: 11px;
+            }
+        }
+
+        #intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #intro h2 {
+            font-size: 48px;
+            text-transform: uppercase;
+        }
+
+        #intro p {
+            font-size: 18px;
+        }
+
+        #start-test {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid #ffffff;
+            border-radius: 20px;
+            background: transparent;
+            color: #ffffff;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            #intro h2 {
+                font-size: 32px;
+            }
+
+            #intro p {
+                font-size: 14px;
+            }
+        }
+
+        #result {
+            display: none;
+            flex-direction: column;
+            color: #ffffff;
+            padding: 40px;
+        }
+
+        #result h2 {
+            font-size: 36px;
+            text-transform: uppercase;
+        }
+
+        #result .archetype-desc {
+            font-size: 18px;
+        }
+
+        #result .strength {
+            font-size: 18px;
+        }
+
+        #result .growth {
+            font-size: 18px;
+        }
+
+        #result form {
+            margin-top: 20px;
+        }
+
+        #result input {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            border-radius: 20px;
+        }
+
+        #result button {
+            padding: 10px 20px;
+            border: 1px solid #ffffff;
+            border-radius: 20px;
+            background: transparent;
+            color: #ffffff;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        #quiz {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="quiz">
+        <div class="left">
+            <div class="header-left">
+                <div id="unmute" class="icon headphones"></div>
+                <p>для лучшего погружения<br>в себя <span>наденьте наушники</span></p>
+            </div>
+            <h1 class="desktop-title" id="question-title-desktop"></h1>
+            <h1 class="mobile-title" id="question-title-mobile"></h1>
+            <ul class="options">
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p id="option1"></p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p id="option2"></p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p id="option3"></p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p id="option4"></p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p id="option5"></p>
+                </li>
+                <li class="option">
+                    <div class="icon number"></div>
+                    <p id="option6"></p>
+                </li>
+            </ul>
+            <button id="buttonNext" class="button-next">
+                <p>к следующему вопросу <span>⟶</span></p>
+            </button>
+        </div>
+        <div class="right">
+            <img id="bg-poster" src="./img/poster/1.png" alt="Poster" class="bg-poster">
+            <video autoplay loop muted playsinline preload="auto" class="bg-video">
+                <source id="video-source" src="./video/desktop/1.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+        <div class="header-right">by setters<br>education team</div>
+        <div class="footer-right" id="progress">1/15</div>
+    </div>
+
+    <div id="intro">
+        <div class="desktop-intro">
+            <h2>КАКОЙ ВЫ ЛИДЕР?</h2>
+            <p>Узнайте свой архетип и точку роста</p>
+            <p>Каждый лидер обладает своим стилем мышления и поведения, ценностями, подходом к управлению. Так, кто же
+                вы: рациональный архитектор, визионерский провидец или гибкий дипломат?</p>
+            <button id="start-test">ПРОЙТИ ТЕСТ</button>
+        </div>
+        <div class="mobile-intro" style="display: none;">
+            <h2>КАКОЙ ВЫ ЛИДЕР?</h2>
+            <p>Узнайте свой архетип и точку роста</p>
+            <p>Каждый лидер обладает своим стилем мышления и поведения, ценностями, подходом к управлению. Так, кто же
+                вы: рациональный архитектор, визионерский провидец или гибкий дипломат?</p>
+            <button id="start-test-mobile">ПРОЙТИ ТЕСТ</button>
+        </div>
+    </div>
+
+    <div id="result" class="container">
+        <div class="left">
+            <h2 id="archetype-title"></h2>
+            <p id="archetype-desc"></p>
+            <h3>Ваша сила</h3>
+            <p id="strength"></p>
+            <h3>Зона роста</h3>
+            <p id="growth"></p>
+            <p>Заполните форму, чтобы скачать персонализированное видео с рекомендациями</p>
+            <form>
+                <input type="text" placeholder="Имя">
+                <input type="email" placeholder="Email">
+                <input type="tel" placeholder="Телефон">
+                <input type="text" placeholder="Компания">
+                <button type="submit">Скачать видео</button>
+            </form>
+        </div>
+        <div class="right">
+            <!-- Perhaps a background image or video for result -->
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                desktopTitle: 'В вашу команду<br>пришел новый<br><span>сотрудник.</span><br>Ваши <span>первые</span> действия:',
+                mobileTitle: 'В вашу команду<br>пришел новый<br><span>сотрудник.<br></span> Ваши <span>первые</span> действия:',
+                title: 'В вашу команду пришел новый сотрудник. Ваши первые действия:',
+                options: [
+                    'Провожу детальный онбординг по всем<br>процессам и стандартам работы',
+                    'Сразу включаю<br>в активную работу',
+                    'Даю задачу, которая поможет ему проявить<br>свои сильные стороны',
+                    'Устраиваю индивидуальную встречу,<br>чтобы понять его цели и амбиции',
+                    'Знакомлю с командой и организую<br>неформальную встречу',
+                    'Знакомлю с ключевыми целями и миссией<br>компании. Обсуждаем его роль и вклад<br>в большую цель.'
+                ]
+            },
+            {
+                desktopTitle: 'Команда столкнулась<br>с серьезной<br><span>проблемой</span><br>в проекте. Ваше<br><span>первое</span> действие:',
+                mobileTitle: '',
+                title: 'Команда столкнулась с серьезной проблемой в проекте. Ваше первое действие:',
+                options: [
+                    'Ищу конкретный сбой и корректирую<br>рабочий процесс',
+                    'Беру ответственность и привлекаю<br>команду к решению',
+                    'Ищу неочевидные<br>варианты решения.',
+                    'Провожу ретро с командой,<br>и делаем выводы',
+                    'Общаюсь с каждым индивидуально,<br>чтобы понять ощущения членов команды',
+                    'Объясняю, как решение этой проблемы<br>поможет нам стать сильнее'
+                ]
+            },
+            {
+                desktopTitle: 'При постановке<br><span>целей</span><br>команде <span>вы:</span>',
+                mobileTitle: 'При постановке<br><span>целей</span> команде <span>вы:</span>',
+                title: 'При постановке целей команде вы:',
+                options: [
+                    'Разбиваю цель на четкие задачи <br>с дедлайнами и метриками',
+                    'Ставлю амбициозную цель<br>и транслирую команде',
+                    'Генерю разные варианты достижения цели<br>и выбираю наиболее нестандартный.',
+                    'Обсуждаю с каждым, как цель<br>связана с их личным развитием',
+                    'Убеждаюсь, что все понимают цель одинаково<br>и готовы её реализовывать.',
+                    'Показываю, как эта цель связана с миссией<br>компании и ведёт нас к ее реализации.'
+                ]
+            },
+            {
+                desktopTitle: 'В вашем календаре<br><span>больше всего</span><br><span>времени</span> занимают:',
+                mobileTitle: '',
+                title: 'В вашем календаре больше всего времени занимают:',
+                options: [
+                    'Встречи по планированию и контролю<br>выполнения задач',
+                    'Оперативки, решение срочных вопросов<br>и принятие решений',
+                    'Изучение рынка, мозговой штурм, анализ<br>конкурентов и поиск возможностей',
+                    'Индивидуальные встречи<br>с сотрудниками (1:1)',
+                    'Командные встречи, совместные обсуждения<br>и решение рабочих вопросов',
+                    'Стратегические сессии и презентации<br>долгосрочных планов'
+                ]
+            },
+            {
+                desktopTitle: 'Какого сотрудника<br>вы считаете<br><span>наиболее подходящим</span><br>для <span>вашей</span> команды?',
+                mobileTitle: '',
+                title: 'Какого сотрудника вы считаете наиболее подходящим для вашей команды?',
+                options: [
+                    'Того, кто четко следует установленным правилам<br>и выдает качественный результат в срок',
+                    'Того, кто не сдается перед трудностями<br>и готов работать в высоком темпе',
+                    'Того, кто умеет адаптироваться<br>к изменениям и находить решения',
+                    'Того, кто растет и помогает<br>расти другим',
+                    'Того, кто хорошо работает в команде<br>и поддерживает коллег',
+                    'Того, кто разделяет наши ценности<br>и вдохновляется общей миссией'
+                ]
+            },
+            {
+                desktopTitle: 'В ситуации<br><span>неопределенности</span><br>вы:',
+                mobileTitle: '',
+                title: 'В ситуации неопределенности вы:',
+                options: [
+                    'Создаю четкий план действий и следую<br>ему пошагово',
+                    'Принимаю быстрые решения на основе<br>имеющейся информации',
+                    'Ищу, как можно сломать шаблоны и применить<br>нестандартный подход.',
+                    'Поддерживаю команду, помогаю каждому<br>справиться со стрессом и увидеть точки роста.',
+                    'Собираю мнения всех участников<br>и ищу консенсус',
+                    'Напоминаю о долгосрочных целях<br>и важности происходящего'
+                ]
+            },
+            {
+                desktopTitle: 'Ваш стиль<br><span>проведения</span><br>встреч:',
+                mobileTitle: '',
+                title: 'Ваш стиль проведения встреч:',
+                options: [
+                    'Структурированная повестка, четкие временные<br>рамки, конкретные решения',
+                    'Быстрый темп, фокус на приоритетах, четкое<br>распределение задач',
+                    'Обсуждение различных вариантов и поиск<br>лучшего решения',
+                    'Разговариваем о прогрессе, целях и зонах<br>развития каждого участника.',
+                    'Каждый высказывается, решения<br>принимаются коллегиально',
+                    'Обсуждаем стратегические факторы, влияние<br>текущих решений на будущее и миссию компании.'
+                ]
+            },
+            {
+                desktopTitle: 'Когда нужно<br><span>принять</span><br><span>сложное</span> решение, вы:',
+                mobileTitle: '',
+                title: 'Когда нужно принять сложное решение, вы:',
+                options: [
+                    'Анализирую все данные и выбираю наиболее<br>логичный вариант',
+                    'Быстро сопоставляю факты, оцениваю риски<br>и действую решительно.',
+                    'Ищу варианты, которые другие могли<br>не рассмотреть',
+                    'Привлекаю сильных игроков команды<br>к обсуждению, чтобы найти наилучшее решение.',
+                    'Стремлюсь найти решение,<br>которое устроит всех',
+                    'Выбираю вариант, который лучше соответствует<br>нашим ценностям'
+                ]
+            },
+            {
+                desktopTitle: 'В стрессовой<br>ситуации <span>вы ожидаете</span><br>от команды:',
+                mobileTitle: '',
+                title: 'В стрессовой ситуации вы ожидаете от команды:',
+                options: [
+                    'Действовать по инструкции<br>и не терять фокус.',
+                    'Решительность и уверенность,<br>что мы справимся',
+                    'Предложить нестандартные идеи,<br>перевернуть ситуацию.',
+                    'Использовать ситуацию для личного<br>роста и взросления.',
+                    'Поддерживать друг друга<br>и сохранять единство.',
+                    'Помнить, ради чего<br>мы всё это делаем.'
+                ]
+            },
+            {
+                desktopTitle: 'Что мотивирует вас<br><span>больше всего</span><br>в работе руководителя:',
+                mobileTitle: '',
+                title: 'Что мотивирует вас больше всего в работе руководителя:',
+                options: [
+                    'Видеть, как налаженная система приносит<br>стабильные результаты',
+                    'Преодолевать препятствия и достигать<br>сложных целей',
+                    'Открывать новые возможности для команды<br>и бизнеса',
+                    'Наблюдать, как люди растут и достигают<br>своих целей',
+                    'Создавать атмосферу, где каждый чувствует<br>себя важным',
+                    'Вести людей к достижению чего-то значимого<br>и важного'
+                ]
+            },
+            // {
+            //     desktopTitle: '',
+            //     mobileTitle: '',
+            //     title: 'Как вы обычно даете обратную связь?',
+            //     options: [
+            //         'Структурно: с конкретными примерами и четким планом действий.',
+            //         'Прямо и чётко: говорю, как есть — важно быстро донести суть, даже если это жёстко.',
+            //         'Обратная связь — это поле для эксперимента: пробую разные форматы, смотрю, что сработает на человека, тестирую подходы.',
+            //         'Поддерживаю, отмечаю сильные стороны и зоны роста. Делаю это регулярно',
+            //         'Сначала слушаю, потом мягко делюсь наблюдениями — важно сохранить контакт.',
+            //         'Связываю поведение с нашими смыслами и целью — «как это влияет на общее будущее».'
+            //     ]
+            // },
+            {
+                desktopTitle: 'Как вы видите<br><span>развитие сотрудников</span><br>в вашей команде?',
+                mobileTitle: '',
+                title: 'Как вы видите развитие сотрудников в вашей команде?',
+                options: [
+                    'Через систему: карьерные треки, цели, оценки,<br>понятные ожидания.',
+                    'Через реальные вызовы: чем сложнее задача,<br>тем быстрее рост.',
+                    'Через свободу: пробовать, ошибаться, делать<br>выводы и снова пробовать.',
+                    'Через личное сопровождение: регулярные<br>1:1, коучинг, план развития.',
+                    'Через совместное обучение, обмен опытом<br>и культуру поддержки.',
+                    'Через участие в проектах, которые вдохновляют<br>и дают ощущение миссии.'
+                ]
+            },
+            {
+                desktopTitle: 'Как вы обычно<br><span>проводите</span><br>ретроспективу <span>в команде</span>?',
+                mobileTitle: '',
+                title: 'Как вы обычно проводите ретроспективу в команде?',
+                options: [
+                    'По заранее подготовленной структуре<br>и фиксируем все решения.',
+                    'Выявили ошибки — сразу договорились,<br>кто что меняет.',
+                    'В формате мозгового штурма — ищем<br>неожиданные выводы, пересобираем подход.',
+                    'Через рефлексию: что получилось,<br>чему научились, что усилило рост.',
+                    'В тёплой атмосфере, чтобы каждый мог<br>открыто поделиться и быть услышанным',
+                    'Использую ретро, чтобы понять, как текущие<br>шаги влияют на реализацию нашей цели'
+                ]
+            },
+            {
+                desktopTitle: 'Как вы решаете<br><span>конфликты</span><br>в команде?',
+                mobileTitle: '',
+                title: 'Как вы решаете конфликты в команде?',
+                options: [
+                    'Ввожу правила, структурирую роли и зоны<br>ответственности.',
+                    'Принимаю решение сам — конфликт<br>не должен тормозить результат.',
+                    'Смотрю на глубинную причину — возможно,<br>это сигнал для изменений.',
+                    'Помогаю участникам услышать друг друга, фокус<br>на росте и развитии.',
+                    'Создаю безопасное пространство<br>для диалога. Главное — сохранить отношения.',
+                    'Перенаправляю внимание на общие смыслы<br>и то, что нас объединяет.'
+                ]
+            },
+            {
+                desktopTitle: 'Что для вас — <span>главный</span><br><span>результат</span> вашей<br>работы как лидера?',
+                mobileTitle: '',
+                title: 'Что для вас — главный результат вашей работы как лидера?',
+                options: [
+                    'Когда всё работает без моего участия: процессы<br>отлажены, задачи идут по плану, команда автономна.',
+                    'Когда цель достигнута — несмотря<br>на трудности, неопределённость и ограничения.',
+                    'Когда мы сделали то, что раньше казалось<br>невозможным, — вышли за пределы привычного.',
+                    'Когда вижу, как человек вырос, поверил в себя<br>и стал двигаться увереннее.',
+                    'Когда каждый в команде чувствует себя нужным<br>и полезным, услышанным и вовлеченным',
+                    'Когда то, что мы сделали, откликается в других<br>и оставляет след — когда сделали что-то значимое.'
+                ]
+            },
+            {
+                desktopTitle: 'Какую культуру вы<br><span>стремитесь</span> выстроить<br>в своей команде?',
+                mobileTitle: '',
+                title: 'Какую культуру вы стремитесь выстроить в своей команде?',
+                options: [
+                    'Рациональную, организованную, с понятными<br>правилами и зонами ответственности.',
+                    'Боевую, целеориентированную, где важны<br>сила, решительность и скорость.',
+                    'Исследовательскую, где каждый может<br>предложить новое и попробовать.',
+                    'Культуру роста, где люди учатся, делятся опытом<br>и развиваются вместе.',
+                    'Тёплую, доверительную, где ценится<br>командность и взаимная поддержка.',
+                    'Вдохновляющую, объединённую идеей и мечтой,<br>которая больше нас самих.'
+                ]
+            }
+        ];
+
+        const archetypes = {
+            'A': { name: 'Архитектор', element: 'Гора', desc: 'Вы лидер, который превращает хаос в порядок. Ваша миссия — создавать системы, которые работают стабильно и масштабируются без вас. Вы рациональны, структурны, надёжны, цените ясность и эффективность.', strength: 'Порядок и предсказуемость.', growth: 'Помнить, что за схемами стоят люди, и иногда важнее гибкость, чем контроль.' },
+            'B': { name: 'Воин', element: 'Огонь', desc: 'Вы лидер, который ведет команду через трудности с решительностью и скоростью. Ваша миссия — достигать целей несмотря на препятствия.', strength: 'Решительность и фокус на результатах.', growth: 'Иногда важно дать команде пространство для отдыха и рефлексии.' },
+            'C': { name: 'Первопроходец', element: 'Ветер', desc: 'Вы лидер, который ищет новые пути и инновации. Ваша миссия — открывать возможности и ломать шаблоны.', strength: 'Креативность и адаптивность.', growth: 'Не забывать о стабильности и рисках в инновациях.' },
+            'D': { name: 'Катализатор', element: 'Вода', desc: 'Вы лидер, который фокусируется на росте людей. Ваша миссия — помогать команде развиваться и достигать потенциала.', strength: 'Эмпатия и развитие.', growth: 'Балансировать личный рост с бизнес-целями.' },
+            'E': { name: 'Дипломат', element: 'Воздух', desc: 'Вы лидер, который строит гармонию в команде. Ваша миссия — создавать атмосферу поддержки и консенсуса.', strength: 'Командная работа и отношения.', growth: 'Иногда нужно принимать жесткие решения без консенсуса.' },
+            'F': { name: 'Провидец', element: 'Солнце', desc: 'Вы лидер, который вдохновляет миссией. Ваша миссия — вести к значимым целям и будущему.', strength: 'Вдохновение и видение.', growth: 'Связывать видение с практическими шагами.' }
+        };
+
+        let currentQuestion = 0;
+        let answers = JSON.parse(localStorage.getItem('answers')) || [];
+
+        function loadQuestion() {
+            if (currentQuestion === 0) {
+                document.getElementById('intro').style.display = 'flex';
+                document.getElementById('quiz').style.display = 'none';
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
+            if (currentQuestion > 15) {
+                calculateResult();
+                return;
+            }
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('quiz').style.display = 'flex';
+            document.getElementById('result').style.display = 'none';
+
+            const q = questions[currentQuestion - 1];
+            document.getElementById('question-title-desktop').innerHTML = q.desktopTitle;
+            document.getElementById('question-title-mobile').innerHTML = q.mobileTitle;
+
+            // document.getElementById('question-title-desktop').innerHTML = q.title.replace(/(\b\w+\b)/g, function (match, p1) { return Math.random() > 0.5 ? '<span>' + p1 + '</span>' : p1; }); // Approximate span placement
+            // document.getElementById('question-title-mobile').innerHTML = q.title.replace(/(\b\w+\b)/g, function (match, p1) { return Math.random() > 0.5 ? '<span>' + p1 + '</span>' : p1; });
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById('option' + i).innerHTML = q.options[i - 1].replace(/\n/g, '<br>');
+            }
+            document.getElementById('progress').innerText = currentQuestion + '/15';
+
+            // Load video and poster
+            document.getElementById('bg-poster').src = './img/poster/' + currentQuestion + '.png';
+            setVideoSource();
+
+            // If previously answered, highlight
+            const prev = answers[currentQuestion - 1];
+            if (prev) {
+                const index = prev.charCodeAt(0) - 'A'.charCodeAt(0);
+                document.querySelectorAll('.option')[index].classList.remove('inactive');
+                document.querySelectorAll('.option').forEach((o, i) => { if (i !== index) o.classList.add('inactive'); });
+                buttonNext.style.visibility = 'visible';
+            } else {
+                document.querySelectorAll('.option').forEach(o => o.classList.remove('inactive'));
+                buttonNext.style.visibility = 'hidden';
+            }
+        }
+
+        function calculateResult() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').style.display = 'flex';
+
+            const counts = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
+            answers.forEach(a => counts[a]++);
+
+            let max = 0;
+            let maxKey = '';
+            for (let key in counts) {
+                if (counts[key] > max) {
+                    max = counts[key];
+                    maxKey = key;
+                }
+            }
+
+            // For simplicity, show the max archetype, ignore hybrid etc for prototype
+            const arch = archetypes[maxKey];
+            document.getElementById('archetype-title').innerText = 'ВЫ – ' + arch.name + '\n(Элемент: ' + arch.element + ')';
+            document.getElementById('archetype-desc').innerText = arch.desc;
+            document.getElementById('strength').innerText = arch.strength;
+            document.getElementById('growth').innerText = arch.growth;
+
+            // Clear answers for next time
+            answers = [];
+            localStorage.removeItem('answers');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const video = document.querySelector('.bg-video');
+            const poster = document.querySelector('.bg-poster');
+            const source = video.querySelector('source');
+
+            window.setVideoSource = function () {
+                if (currentQuestion === 0 || currentQuestion > 15) return;
+                if (window.innerWidth <= 768) {
+                    source.src = './video/mobile/' + currentQuestion + '.mp4';
+                } else {
+                    source.src = './video/desktop/' + currentQuestion + '.mp4';
+                }
+                video.load();
+            }
+
+            setVideoSource();
+
+            video.addEventListener('canplay', function () {
+                poster.classList.add('inactive');
+                video.classList.add('active');
+                video.play();
+            });
+
+            video.addEventListener('error', function () {
+                poster.classList.remove('inactive');
+                video.classList.remove('active');
+            });
+            video.addEventListener('stalled', function () {
+                poster.classList.remove('inactive');
+                video.classList.remove('active');
+            });
+            video.addEventListener('emptied', function () {
+                poster.classList.remove('inactive');
+                video.classList.remove('active');
+            });
+
+            let resizeTimeout;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(setVideoSource, 300);
+            });
+        });
+
+        document.getElementById('unmute').addEventListener('click', function () {
+            const video = document.querySelector('.bg-video');
+            video.muted = false;
+            video.volume = 1;
+            video.play();
+        });
+
+        const buttonNext = document.getElementById('buttonNext');
+        document.querySelectorAll('.options .option').forEach((option, index) => {
+            option.addEventListener('click', function () {
+                buttonNext.style.visibility = 'visible';
+                document.querySelectorAll('.options .option').forEach(o => o.classList.add('inactive'));
+                this.classList.remove('inactive');
+                const letter = String.fromCharCode('A'.charCodeAt(0) + index);
+                answers[currentQuestion - 1] = letter;
+                localStorage.setItem('answers', JSON.stringify(answers));
+            });
+        });
+
+        buttonNext.addEventListener('click', function () {
+            currentQuestion++;
+            loadQuestion();
+        });
+
+        document.getElementById('start-test').addEventListener('click', function () {
+            currentQuestion = 1;
+            loadQuestion();
+        });
+
+        // For mobile start button if separate
+        if (document.getElementById('start-test-mobile')) {
+            document.getElementById('start-test-mobile').addEventListener('click', function () {
+                currentQuestion = 1;
+                loadQuestion();
+            });
+        }
+
+        // Initial load
+        loadQuestion();
+
+        // Media query to show mobile/desktop intro
+        if (window.innerWidth <= 768) {
+            document.querySelector('.desktop-intro').style.display = 'none';
+            document.querySelector('.mobile-intro').style.display = 'flex';
+        }
+    </script>
+</body>
+
+</html>

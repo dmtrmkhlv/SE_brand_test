@@ -530,9 +530,9 @@
             </button>
         </div>
         <div class="right">
-            <img src="./img/main1.png" alt="Закат" class="bg-poster">
+            <img src="./img/poster/1.png" alt="Закат" class="bg-poster">
             <video autoplay loop muted playsinline preload="auto" class="bg-video">
-                <source src="./video/main1.mp4" type="video/mp4">
+                <source src="./video/desktop/1.mp4" type="video/mp4">
                 Ваш браузер не поддерживает видео.
             </video>
         </div>
@@ -548,13 +548,11 @@
 
             function setVideoSource() {
                 if (window.innerWidth <= 768) {
-                    source.src = './video/main-mobile1.mp4';
-                    //source.src = './video/main.mp4';
+                    source.src = './video/mobile/1.mp4';
                 } else {
-                    source.src = './video/main1.mp4';
+                    source.src = './video/desktop/1.mp4';
                 }
                 video.load();
-                //video.play();
             }
 
             setVideoSource();
@@ -589,7 +587,6 @@
             video.muted = false;
             video.volume = 1;
             video.play();
-            //this.style.display = 'none';
         });
         const buttonNext = document.getElementById('buttonNext');
         document.querySelectorAll('.options .option').forEach(option => {
