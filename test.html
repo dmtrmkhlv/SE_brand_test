@@ -489,7 +489,7 @@
             height: 100vh;
             color: #ffffff;
             text-align: center;
-            padding: 20px;
+            /* padding: 20px; */
         }
 
         #intro h2 {
@@ -503,13 +503,20 @@
 
         #start-test {
             margin-top: 20px;
-            padding: 10px 20px;
+            padding: 6px 0px;
             border: 1px solid #ffffff;
             border-radius: 20px;
             background: transparent;
             color: #ffffff;
             text-transform: uppercase;
             cursor: pointer;
+
+            position: absolute;
+            top: 647px;
+            left: 600px;
+            visibility: visible;
+            min-width: 180px;
+
         }
 
         @media (max-width: 768px) {
@@ -520,6 +527,7 @@
             #intro p {
                 font-size: 14px;
             }
+
         }
 
         #result {
@@ -572,6 +580,187 @@
 
         #quiz {
             display: none;
+        }
+
+        .intro_block {
+            display: flex;
+            gap: 10px;
+            position: relative;
+        }
+
+        .intro_block__img {
+            width: 137px;
+            height: 135px;
+            object-fit: cover;
+        }
+
+        .intro_block__text,
+        .intro_block__number {
+            font-weight: 300;
+            font-style: normal;
+            font-size: 10px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: bottom;
+            text-align: left;
+        }
+
+        .intro_block__rightBottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .position1 {
+            position: absolute;
+            top: 104px;
+            left: 224px;
+        }
+
+        .position2 {
+            position: absolute;
+            top: 155px;
+            right: 63px;
+        }
+
+        .position3 {
+            position: absolute;
+            top: 353px;
+            left: 366px;
+        }
+
+        .position4 {
+            position: absolute;
+            bottom: 112px;
+            left: 46px;
+        }
+
+        .position5 {
+            position: absolute;
+            bottom: 1px;
+            right: 233px;
+        }
+
+        .intro_logo {
+            position: absolute;
+            top: 30px;
+            left: 360px;
+        }
+
+        #intro .desktop-intro h1 {
+            font-weight: 400;
+            font-style: normal;
+            font-size: 58.51px;
+            line-height: 110%;
+            letter-spacing: 0;
+            vertical-align: bottom;
+            text-transform: uppercase;
+
+            position: absolute;
+            top: 279px;
+            left: 360px;
+
+        }
+
+        #intro .desktop-intro h1 span {
+            font-weight: 200;
+            font-style: oblique;
+            font-size: 58.51px;
+            line-height: 110%;
+            letter-spacing: 0;
+            vertical-align: bottom;
+            text-transform: uppercase;
+
+        }
+
+        #intro .desktop-intro h2 {
+            font-weight: 400;
+            font-style: normal;
+            font-size: 33.84px;
+            line-height: 110%;
+            letter-spacing: 0;
+            vertical-align: bottom;
+            text-transform: uppercase;
+            text-align: left;
+
+            position: absolute;
+            top: 427px;
+            left: 600px;
+
+        }
+
+        #intro .desktop-intro p {
+            font-weight: 300;
+            font-style: normal;
+            font-size: 15px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: bottom;
+            text-align: left;
+
+            position: absolute;
+            top: 534px;
+            left: 600px;
+
+        }
+
+        #intro .desktop-intro #start-test p {
+            position: relative;
+            top: unset;
+            left: unset;
+        }
+
+        #intro .desktop-intro p span {
+            font-weight: 500;
+            font-style: oblique;
+            font-size: 15px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: bottom;
+
+        }
+
+        @media (max-width: 768px) {
+            .position1 {
+                position: absolute;
+                top: 39px;
+                left: 23px;
+            }
+
+            .position2 {
+                position: absolute;
+                top: 88px;
+                right: 169px;
+            }
+
+            .position3 {
+                position: absolute;
+                top: 203px;
+                left: 26px;
+            }
+
+            .position4 {
+                position: absolute;
+                bottom: 0px;
+                right: 48px;
+            }
+
+            .position5 {
+                position: absolute;
+                bottom: 412px;
+                right: 0px;
+            }
+
+            .intro_logo {
+                position: absolute;
+                top: 30px;
+                left: 360px;
+            }
+
+            .intro_block__text,
+            .intro_block__number {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -627,19 +816,65 @@
     </div>
 
     <div id="intro">
+        <div class="intro_logo">
+            <img src="./img/SE_logo.svg" alt="Logo">
+        </div>
+        <div class="intro_block position1">
+            <div class="intro_block__text"></div>
+            <img class="intro_block__img" src="./img/poster_mini/8.png" alt="Intro Image">
+            <div class="intro_block__number">//01</div>
+        </div>
+        <div class="intro_block position2">
+            <div class="intro_block__text">[What kind of leader are you?]</div>
+            <img class="intro_block__img" src="./img/poster_mini/9.png" alt="Intro Image">
+            <div class="intro_block__number">//02</div>
+        </div>
+
         <div class="desktop-intro">
-            <h2>КАКОЙ ВЫ ЛИДЕР?</h2>
-            <p>Узнайте свой архетип и точку роста</p>
-            <p>Каждый лидер обладает своим стилем мышления и поведения, ценностями, подходом к управлению. Так, кто же
-                вы: рациональный архитектор, визионерский провидец или гибкий дипломат?</p>
-            <button id="start-test">ПРОЙТИ ТЕСТ</button>
+            <h1>КАКОЙ ВЫ<br><span>ЛИДЕР?</span></h1>
+            <div class="intro_block position3">
+                <div class="intro_block__text">//03</div>
+                <img class="intro_block__img" src="./img/poster_mini/5.png" alt="Intro Image">
+                <div class="intro_block__number"></div>
+            </div>
+            <h2>Узнайте свой архетип <br>и точку роста</h2>
+            <p>Каждый лидер обладает своим стилем мышления <br>и поведения, ценностями, подходом к управлению.<br>Так,
+                кто же вы: рациональный <span>архитектор</span>,<br> визионерский <span>провидец</span> или гибкий
+                <span>дипломат</span>?
+            </p>
+            <button id="start-test" class="button-next">
+                <p>ПРОЙТИ ТЕСТ </p>
+            </button>
+        </div>
+
+        <div class="intro_block position4">
+            <img class="intro_block__img" src="./img/poster_mini/3.png" alt="Intro Image">
+            <div class="intro_block__number intro_block__rightBottom">//04<div class="intro_block__text ">[Find out
+                    your<br>personality type
+                    <br>and growth potential]
+                </div>
+            </div>
         </div>
         <div class="mobile-intro" style="display: none;">
-            <h2>КАКОЙ ВЫ ЛИДЕР?</h2>
-            <p>Узнайте свой архетип и точку роста</p>
-            <p>Каждый лидер обладает своим стилем мышления и поведения, ценностями, подходом к управлению. Так, кто же
-                вы: рациональный архитектор, визионерский провидец или гибкий дипломат?</p>
-            <button id="start-test-mobile">ПРОЙТИ ТЕСТ</button>
+            <h1>КАКОЙ ВЫ<br><span>ЛИДЕР?</span></h1>
+            <div class="intro_block position3">
+                <div class="intro_block__text">//03</div>
+                <img class="intro_block__img" src="./img/poster_mini/5.png" alt="Intro Image">
+                <div class="intro_block__number"></div>
+            </div>
+            <h2>Узнайте свой архетип <br>и точку роста</h2>
+            <p>Каждый лидер обладает своим стилем мышления <br>и поведения, ценностями, подходом к управлению.<br>Так,
+                кто же вы: рациональный <span>архитектор</span>,<br> визионерский <span>провидец</span> или гибкий
+                <span>дипломат</span>?
+            </p>
+            <button id="start-test" class="button-next">
+                <p>ПРОЙТИ ТЕСТ </p>
+            </button>
+        </div>
+        <div class="intro_block position5">
+            <div class="intro_block__text"></div>
+            <img class="intro_block__img" src="./img/poster_mini/6.png" alt="Intro Image">
+            <div class="intro_block__number">//05</div>
         </div>
     </div>
 
@@ -682,7 +917,7 @@
             },
             {
                 desktopTitle: 'Команда столкнулась<br>с серьезной<br><span>проблемой</span><br>в проекте. Ваше<br><span>первое</span> действие:',
-                mobileTitle: '',
+                mobileTitle: 'Команда столкнулась<br>с серьезной<br><span>проблемой</span><br>в проекте. Ваше<br><span>первое</span> действие:',
                 title: 'Команда столкнулась с серьезной проблемой в проекте. Ваше первое действие:',
                 options: [
                     'Ищу конкретный сбой и корректирую<br>рабочий процесс',
@@ -708,7 +943,7 @@
             },
             {
                 desktopTitle: 'В вашем календаре<br><span>больше всего</span><br><span>времени</span> занимают:',
-                mobileTitle: '',
+                mobileTitle: 'В вашем календаре<br><span>больше всего</span><br><span>времени</span> занимают:',
                 title: 'В вашем календаре больше всего времени занимают:',
                 options: [
                     'Встречи по планированию и контролю<br>выполнения задач',
@@ -721,7 +956,7 @@
             },
             {
                 desktopTitle: 'Какого сотрудника<br>вы считаете<br><span>наиболее подходящим</span><br>для <span>вашей</span> команды?',
-                mobileTitle: '',
+                mobileTitle: 'Какого сотрудника<br>вы считаете<br><span>наиболее подходящим</span><br>для <span>вашей</span> команды?',
                 title: 'Какого сотрудника вы считаете наиболее подходящим для вашей команды?',
                 options: [
                     'Того, кто четко следует установленным правилам<br>и выдает качественный результат в срок',
@@ -734,7 +969,7 @@
             },
             {
                 desktopTitle: 'В ситуации<br><span>неопределенности</span><br>вы:',
-                mobileTitle: '',
+                mobileTitle: 'В ситуации<br><span>неопределенности</span><br>вы:',
                 title: 'В ситуации неопределенности вы:',
                 options: [
                     'Создаю четкий план действий и следую<br>ему пошагово',
@@ -747,7 +982,7 @@
             },
             {
                 desktopTitle: 'Ваш стиль<br><span>проведения</span><br>встреч:',
-                mobileTitle: '',
+                mobileTitle: 'Ваш стиль<br><span>проведения</span><br>встреч:',
                 title: 'Ваш стиль проведения встреч:',
                 options: [
                     'Структурированная повестка, четкие временные<br>рамки, конкретные решения',
@@ -760,7 +995,7 @@
             },
             {
                 desktopTitle: 'Когда нужно<br><span>принять</span><br><span>сложное</span> решение, вы:',
-                mobileTitle: '',
+                mobileTitle: 'Когда нужно<br><span>принять</span><br><span>сложное</span> решение, вы:',
                 title: 'Когда нужно принять сложное решение, вы:',
                 options: [
                     'Анализирую все данные и выбираю наиболее<br>логичный вариант',
@@ -773,7 +1008,7 @@
             },
             {
                 desktopTitle: 'В стрессовой<br>ситуации <span>вы ожидаете</span><br>от команды:',
-                mobileTitle: '',
+                mobileTitle: 'В стрессовой<br>ситуации <span>вы ожидаете</span><br>от команды:',
                 title: 'В стрессовой ситуации вы ожидаете от команды:',
                 options: [
                     'Действовать по инструкции<br>и не терять фокус.',
@@ -786,7 +1021,7 @@
             },
             {
                 desktopTitle: 'Что мотивирует вас<br><span>больше всего</span><br>в работе руководителя:',
-                mobileTitle: '',
+                mobileTitle: 'Что мотивирует вас<br><span>больше всего</span><br>в работе руководителя:',
                 title: 'Что мотивирует вас больше всего в работе руководителя:',
                 options: [
                     'Видеть, как налаженная система приносит<br>стабильные результаты',
@@ -812,7 +1047,7 @@
             // },
             {
                 desktopTitle: 'Как вы видите<br><span>развитие сотрудников</span><br>в вашей команде?',
-                mobileTitle: '',
+                mobileTitle: 'Как вы видите<br><span>развитие сотрудников</span><br>в вашей команде?',
                 title: 'Как вы видите развитие сотрудников в вашей команде?',
                 options: [
                     'Через систему: карьерные треки, цели, оценки,<br>понятные ожидания.',
@@ -825,7 +1060,7 @@
             },
             {
                 desktopTitle: 'Как вы обычно<br><span>проводите</span><br>ретроспективу <span>в команде</span>?',
-                mobileTitle: '',
+                mobileTitle: 'Как вы обычно<br><span>проводите</span><br>ретроспективу <span>в команде</span>?',
                 title: 'Как вы обычно проводите ретроспективу в команде?',
                 options: [
                     'По заранее подготовленной структуре<br>и фиксируем все решения.',
@@ -838,7 +1073,7 @@
             },
             {
                 desktopTitle: 'Как вы решаете<br><span>конфликты</span><br>в команде?',
-                mobileTitle: '',
+                mobileTitle: 'Как вы решаете<br><span>конфликты</span><br>в команде?',
                 title: 'Как вы решаете конфликты в команде?',
                 options: [
                     'Ввожу правила, структурирую роли и зоны<br>ответственности.',
@@ -851,7 +1086,7 @@
             },
             {
                 desktopTitle: 'Что для вас — <span>главный</span><br><span>результат</span> вашей<br>работы как лидера?',
-                mobileTitle: '',
+                mobileTitle: 'Что для вас — <span>главный</span><br><span>результат</span> вашей<br>работы как лидера?',
                 title: 'Что для вас — главный результат вашей работы как лидера?',
                 options: [
                     'Когда всё работает без моего участия: процессы<br>отлажены, задачи идут по плану, команда автономна.',
@@ -864,7 +1099,7 @@
             },
             {
                 desktopTitle: 'Какую культуру вы<br><span>стремитесь</span> выстроить<br>в своей команде?',
-                mobileTitle: '',
+                mobileTitle: 'Какую культуру вы<br><span>стремитесь</span> выстроить<br>в своей команде?',
                 title: 'Какую культуру вы стремитесь выстроить в своей команде?',
                 options: [
                     'Рациональную, организованную, с понятными<br>правилами и зонами ответственности.',
@@ -891,6 +1126,10 @@
 
         function loadQuestion() {
             if (currentQuestion === 0) {
+                const video = document.querySelector('.bg-video');
+                video.muted = false;
+                video.volume = 1;
+
                 document.getElementById('intro').style.display = 'flex';
                 document.getElementById('quiz').style.display = 'none';
                 document.getElementById('result').style.display = 'none';
