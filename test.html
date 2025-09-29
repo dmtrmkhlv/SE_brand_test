@@ -1147,7 +1147,26 @@
     </div>
 
     <script>
-        // Функция для предзагрузки одного изображения
+        document.addEventListener('DOMContentLoaded', function () {
+            const videosToPreload = [
+                "./video/final/water.mp4",
+                "./video/final/flame.mp4",
+                "./video/final/mountain.mp4",
+                "./video/final/earth.mp4",
+                "./video/final/tree.mp4",
+                "./video/final/wind.mp4"
+            ];
+
+            videosToPreload.forEach(src => {
+                const video = document.createElement('video');
+                video.src = src;
+                video.preload = 'auto';
+                video.style.display = 'none';
+                document.body.appendChild(video);
+                video.load();
+            });
+        });
+
         function preloadImage(src) {
             const img = document.createElement('img');
             img.src = src;
@@ -1156,7 +1175,6 @@
             document.body.appendChild(img);
         }
 
-        // Функция для предзагрузки одного видео
         function preloadVideo(src) {
             const video = document.createElement('video');
             video.src = src;
@@ -1166,7 +1184,6 @@
             video.load();
         }
 
-        // Предзагрузка первого видео и постера при загрузке страницы
         document.addEventListener('DOMContentLoaded', function () {
             const isMobile = window.innerWidth <= 768;
             preloadImage('./img/poster/1.png');
@@ -1453,9 +1470,7 @@
                 }
             }
 
-            // For simplicity, show the max archetype, ignore hybrid etc for prototype
             const arch = archetypes[maxKey];
-            console.log(arch);
 
             document.getElementById('archetype-title-mobile').innerHTML = 'ВЫ – ' + arch.name + '<br><span>(Элемент: ' + arch.element + ')</span>';
             document.getElementById('archetype-title').innerHTML = 'ВЫ – ' + arch.name + '<br><span>(Элемент: ' + arch.element + ')</span>';
@@ -1473,7 +1488,7 @@
             videoResult.volume = 1;
             videoResult.play();
             video.muted = true;
-            // Clear answers for next time
+
             answers = [];
             localStorage.removeItem('answers');
         }
