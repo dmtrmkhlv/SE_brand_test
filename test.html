@@ -15,6 +15,15 @@
             height: 100%;
             font-family: 'ObjectSans', sans-serif;
             background-color: #000000;
+
+            background-image: url(./img/noise.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        button {
+            user-select: none;
         }
 
         .container {
@@ -24,17 +33,13 @@
         }
 
         .left {
-            background-color: #000000;
-            background-image: url('./img/noise.svg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
             color: #ffffff;
             width: calc((100% / 3));
             padding: 34px 40px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .right {
@@ -161,6 +166,10 @@
             user-select: none;
         }
 
+        h1.desktop-title {
+            width: 75%;
+        }
+
         h1 span {
             font-weight: 200;
             font-style: oblique;
@@ -169,7 +178,7 @@
             font-size: 24px;
             line-height: 110%;
             letter-spacing: 0;
-            vertical-align: middle;
+            /* vertical-align: middle; */
             text-transform: uppercase;
         }
 
@@ -178,7 +187,21 @@
             transform: translateX(235px);
             transform: translateX(185px);
 
+            right: 40px;
             display: inline-block;
+        }
+
+        #quiz h1 span:first-of-type {
+            transform: unset;
+            /* position: absolute; */
+            right: 40px;
+            display: inline;
+        }
+
+        #quiz h1 p:first-of-type {
+            padding: 0;
+            margin: 0;
+            text-align: right;
         }
 
         .icon {
@@ -186,8 +209,8 @@
             height: 20px;
             width: 28px;
             height: 28px;
-            min-width: 20px;
-            min-height: 20px;
+            min-width: 28px;
+            min-height: 28px;
             display: inline-block;
             background-size: contain;
             background-repeat: no-repeat;
@@ -298,6 +321,8 @@
             padding: 0 10px;
 
             position: relative;
+
+            z-index: 9999999;
         }
 
         .button-next::before {
@@ -360,6 +385,7 @@
                 padding: 0;
                 flex-flow: column-reverse;
                 height: 100dvh;
+                justify-content: flex-end;
             }
 
             .left {
@@ -367,6 +393,7 @@
                 height: 50dvh;
                 height: auto;
                 padding: 20px;
+                position: unset;
             }
 
             .right {
@@ -435,6 +462,8 @@
 
             .mobile-title {
                 display: block;
+                margin-left: 35px;
+                width: fit-content;
             }
 
             h1,
@@ -450,6 +479,30 @@
                 padding-left: 90px;
                 padding-left: 110px;
                 padding-left: 100px;
+                display: inline;
+            }
+
+            h1.mobile-title span:first-of-type {
+                padding-left: 60px;
+            }
+
+            h1.mobile-title p:first-of-type span:first-of-type {
+                padding-left: 0px;
+            }
+
+            #quiz h1.mobile-title p:first-of-type {
+                padding-left: 60px;
+            }
+
+            #quiz h1.mobile-title p.leftP:first-of-type {
+                padding-left: 0px;
+                text-align: left;
+            }
+
+            #quiz h1 span:first-of-type {
+                transform: unset;
+                position: relative;
+                right: unset;
                 display: inline;
             }
 
@@ -510,12 +563,12 @@
             color: #ffffff;
             text-transform: uppercase;
             cursor: pointer;
-
-            position: absolute;
-            top: 647px;
-            left: 600px;
             visibility: visible;
             min-width: 180px;
+            /* 
+            position: absolute;
+            top: 647px;
+            left: 600px; */
 
         }
 
@@ -528,54 +581,6 @@
                 font-size: 14px;
             }
 
-        }
-
-        #result {
-            display: none;
-            flex-direction: column;
-            color: #ffffff;
-            padding: 40px;
-        }
-
-        #result h2 {
-            font-size: 36px;
-            text-transform: uppercase;
-        }
-
-        #result .archetype-desc {
-            font-size: 18px;
-        }
-
-        #result .strength {
-            font-size: 18px;
-        }
-
-        #result .growth {
-            font-size: 18px;
-        }
-
-        #result form {
-            margin-top: 20px;
-        }
-
-        #result input {
-            display: block;
-            margin-bottom: 10px;
-            padding: 10px;
-            background: transparent;
-            border: 1px solid #ffffff;
-            color: #ffffff;
-            border-radius: 20px;
-        }
-
-        #result button {
-            padding: 10px 20px;
-            border: 1px solid #ffffff;
-            border-radius: 20px;
-            background: transparent;
-            color: #ffffff;
-            text-transform: uppercase;
-            cursor: pointer;
         }
 
         #quiz {
@@ -613,38 +618,39 @@
 
         .position1 {
             position: absolute;
-            top: 104px;
-            left: 224px;
+            top: calc((104 / 780) * 100%);
+            left: calc((224 / 1200) * 100%);
         }
 
         .position2 {
             position: absolute;
-            top: 155px;
-            right: 63px;
+            top: calc((155 / 780) * 100%);
+            right: calc((63 / 1200) * 100%);
         }
 
         .position3 {
             position: absolute;
-            top: 353px;
-            left: 366px;
+            top: calc((353 / 780) * 100%);
+            left: calc((366 / 1200) * 100%);
         }
 
         .position4 {
             position: absolute;
-            bottom: 112px;
-            left: 46px;
+            bottom: calc((112 / 780) * 100%);
+            left: calc((46 / 1200) * 100%);
         }
 
         .position5 {
             position: absolute;
-            bottom: 1px;
-            right: 233px;
+            bottom: calc((1 / 780) * 100%);
+            /* right: calc((233 / 1200) * 100%); */
+            left: calc((830 / 1200) * 100%);
         }
 
         .intro_logo {
             position: absolute;
-            top: 30px;
-            left: 360px;
+            top: calc((30 / 780) * 100%);
+            left: calc((360 / 1200) * 100%);
         }
 
         #intro .desktop-intro h1 {
@@ -657,8 +663,8 @@
             text-transform: uppercase;
 
             position: absolute;
-            top: 279px;
-            left: 360px;
+            top: calc((279 / 780) * 100%);
+            left: calc((360 / 1200) * 100%);
 
         }
 
@@ -683,9 +689,16 @@
             text-transform: uppercase;
             text-align: left;
 
+
+        }
+
+        #intro .desktop-intro_text {
             position: absolute;
             top: 427px;
             left: 600px;
+
+            top: calc((427 / 780) * 100%);
+            left: calc((600 / 1200) * 100%);
 
         }
 
@@ -698,9 +711,9 @@
             vertical-align: bottom;
             text-align: left;
 
-            position: absolute;
+            /* position: absolute;
             top: 534px;
-            left: 600px;
+            left: 600px; */
 
         }
 
@@ -720,47 +733,273 @@
 
         }
 
+        .mobile-br {
+            display: none;
+        }
+
         @media (max-width: 768px) {
+
+            .intro_block__img {
+                width: 80px;
+                height: 78px;
+            }
+
+            #intro .desktop-intro_text {
+                top: calc((236 / 600) * 100%);
+                left: calc((117 / 320) * 100%);
+                left: max(calc((26 / 320) * 100%) + 80px, calc((117 / 320) * 100%));
+            }
+
+            #intro .desktop-intro_text h2 {
+                font-size: 14px;
+            }
+
+            #intro .desktop-intro_text p,
+            #intro .desktop-intro_text p span {
+                font-size: 12px;
+            }
+
+            #intro .desktop-intro_text p {
+                margin-top: calc((36 / 600) * 100%);
+            }
+
+            #intro .desktop-intro h1 {
+                font-size: 22px;
+                top: calc((178 / 600) * 100%);
+                left: calc((23 / 320) * 100%);
+            }
+
+            #intro .desktop-intro h1 span {
+                font-size: 22px;
+            }
+
             .position1 {
                 position: absolute;
-                top: 39px;
-                left: 23px;
+                top: calc((39 / 600) * 100%);
+                left: calc((23 / 320) * 100%);
             }
 
             .position2 {
                 position: absolute;
-                top: 88px;
-                right: 169px;
+                top: calc((88 / 600) * 100%);
+                right: calc((71 / 320) * 100%);
+
+                left: max(calc((23 / 320) * 100%) + 80px, calc(100% - (71 / 320) * 100%));
             }
 
             .position3 {
                 position: absolute;
-                top: 203px;
-                left: 26px;
+                top: calc((203 / 600) * 100%);
+                left: calc((26 / 320) * 100%);
             }
 
             .position4 {
                 position: absolute;
-                bottom: 0px;
-                right: 48px;
+                bottom: calc((0 / 600) * 100%);
+                right: calc((48 / 320) * 100%);
+                left: unset;
             }
 
             .position5 {
                 position: absolute;
-                bottom: 412px;
-                right: 0px;
+                top: calc((410 / 600) * 100%);
+                left: calc((0 / 320) * 100%);
             }
 
             .intro_logo {
                 position: absolute;
-                top: 30px;
-                left: 360px;
+                top: calc((39 / 600) * 100%);
+                left: calc((117 / 320) * 100%);
+
+                left: max(calc((23 / 320) * 100%) + 100px, calc((117 / 320) * 100%));
+            }
+
+            #intro .intro_logo img {
+                width: 100%;
             }
 
             .intro_block__text,
             .intro_block__number {
                 display: none;
             }
+
+            #start-test.button-next {
+                bottom: unset;
+                right: unset;
+                min-width: 125px;
+            }
+
+            #start-test.button-next p {
+                margin-top: unset;
+                text-align: left;
+                margin-right: auto;
+                margin-left: 10px;
+            }
+
+            .mobile-br {
+                height: 20px;
+                display: block;
+            }
+        }
+
+        #result {
+            display: none;
+            flex-direction: column;
+            color: #ffffff;
+            padding: 40px;
+            background-color: #000000;
+            background-image: url(./img/noise.svg);
+        }
+
+        #result h1 {
+            margin-top: 127px;
+            font-size: 40px;
+        }
+
+        #result .bg-video {
+            position: relative;
+
+        }
+
+        #result h1 span {
+            font-size: 40px;
+        }
+
+        #result h1 span:first-of-type {
+            transform: unset;
+        }
+
+        #result.container {
+            overflow: unset;
+            height: fit-content;
+        }
+
+        .result__box {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 52px;
+        }
+
+        .result__box_item {
+            width: 30%;
+        }
+
+        .result__box_item.text {
+            border-right: 2px solid #ffffff;
+            padding: 0 52px 0 0;
+            box-sizing: border-box;
+        }
+
+        .result__box_item.text .strength p,
+        .result__box_item.text .growth p {
+            font-weight: 300;
+            font-style: normal;
+            font-size: 15px;
+            line-height: 120%;
+            letter-spacing: 0;
+            text-transform: uppercase;
+
+        }
+
+        .result__box_item p {
+            font-size: 15px;
+            margin-top: 0;
+        }
+
+        #result form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #result h2 {
+            display: block;
+            width: fit-content;
+        }
+
+        #result form input,
+        #result h2 {
+            appearance: none;
+            border: 1px solid #ffffff;
+            border-radius: 30px;
+            background: transparent;
+            color: #ffffff;
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            outline: none;
+
+            font-weight: 300;
+            font-style: oblique;
+            font-size: 15px;
+            line-height: 120%;
+            letter-spacing: 0;
+            vertical-align: middle;
+            text-transform: uppercase;
+
+        }
+
+        #result h1.mobile {
+            display: none;
+        }
+
+        #result h1.desktop {
+            display: block;
+        }
+
+
+
+        @media (max-width: 768px) {
+            #result .result__box {
+                flex-direction: column;
+                margin-top: 40px;
+            }
+
+            #result .intro_logo {
+                left: unset;
+                margin: 0 auto;
+                position: relative;
+                display: flex;
+                justify-content: center;
+            }
+
+            .result__box_item {
+                width: 100%;
+            }
+
+            .result__box_item.text {
+                border-right: unset;
+                border-bottom: 2px solid #ffffff;
+                padding: 0 0 24px 0;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .result__box {
+                gap: 32px;
+            }
+
+            #result h1.mobile {
+                display: block;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            #result h1.desktop {
+                display: none;
+            }
+
+            #result h1 {
+                margin-top: 127px;
+                font-size: 20px;
+            }
+
+            #result h1 span {
+                font-size: 20px;
+            }
+
+
         }
     </style>
 </head>
@@ -837,14 +1076,18 @@
                 <img class="intro_block__img" src="./img/poster_mini/5.png" alt="Intro Image">
                 <div class="intro_block__number"></div>
             </div>
-            <h2>Узнайте свой архетип <br>и точку роста</h2>
-            <p>Каждый лидер обладает своим стилем мышления <br>и поведения, ценностями, подходом к управлению.<br>Так,
-                кто же вы: рациональный <span>архитектор</span>,<br> визионерский <span>провидец</span> или гибкий
-                <span>дипломат</span>?
-            </p>
-            <button id="start-test" class="button-next">
-                <p>ПРОЙТИ ТЕСТ </p>
-            </button>
+            <div class="desktop-intro_text">
+                <h2>Узнайте свой архетип <br>и точку роста</h2>
+                <p>Каждый лидер обладает своим стилем мышления <br>и поведения, ценностями, подходом к
+                    управлению.<br>
+                    <span class="mobile-br"></span>Так,
+                    кто же вы: рациональный <span>архитектор</span>,<br> визионерский <span>провидец</span> или гибкий
+                    <span>дипломат</span>?
+                </p>
+                <button id="start-test" class="button-next">
+                    <p>ПРОЙТИ ТЕСТ </p>
+                </button>
+            </div>
         </div>
 
         <div class="intro_block position4">
@@ -855,22 +1098,6 @@
                 </div>
             </div>
         </div>
-        <div class="mobile-intro" style="display: none;">
-            <h1>КАКОЙ ВЫ<br><span>ЛИДЕР?</span></h1>
-            <div class="intro_block position3">
-                <div class="intro_block__text">//03</div>
-                <img class="intro_block__img" src="./img/poster_mini/5.png" alt="Intro Image">
-                <div class="intro_block__number"></div>
-            </div>
-            <h2>Узнайте свой архетип <br>и точку роста</h2>
-            <p>Каждый лидер обладает своим стилем мышления <br>и поведения, ценностями, подходом к управлению.<br>Так,
-                кто же вы: рациональный <span>архитектор</span>,<br> визионерский <span>провидец</span> или гибкий
-                <span>дипломат</span>?
-            </p>
-            <button id="start-test" class="button-next">
-                <p>ПРОЙТИ ТЕСТ </p>
-            </button>
-        </div>
         <div class="intro_block position5">
             <div class="intro_block__text"></div>
             <img class="intro_block__img" src="./img/poster_mini/6.png" alt="Intro Image">
@@ -879,31 +1106,86 @@
     </div>
 
     <div id="result" class="container">
-        <div class="left">
-            <h2 id="archetype-title"></h2>
-            <p id="archetype-desc"></p>
-            <h3>Ваша сила</h3>
-            <p id="strength"></p>
-            <h3>Зона роста</h3>
-            <p id="growth"></p>
-            <p>Заполните форму, чтобы скачать персонализированное видео с рекомендациями</p>
-            <form>
-                <input type="text" placeholder="Имя">
-                <input type="email" placeholder="Email">
-                <input type="tel" placeholder="Телефон">
-                <input type="text" placeholder="Компания">
-                <button type="submit">Скачать видео</button>
-            </form>
+        <div class="intro_logo">
+            <img src="./img/SE_logo.svg" alt="Logo">
         </div>
-        <div class="right">
-            <!-- Perhaps a background image or video for result -->
+        <h1 class="desktop" id="archetype-title">ВЫ – АРХИТЕКТОР <br><span>(Элемент: Гора)</span></h1>
+        <div class="result__box">
+            <div class="result__box_item video">
+                <video id="result-video-source" autoplay loop muted playsinline preload="auto" class="bg-video active">
+                    <source src="./video/final/0.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+            <h1 class="mobile">ВЫ – АРХИТЕКТОР <br><span>(Элемент: Гора)</span></h1>
+            <div class="result__box_item text">
+                <div id="archetype-desc">Вы лидер, который превращает хаос в порядок. Ваша миссия — создавать системы,
+                    которые работают
+                    стабильно
+                    и масштабируются без вас. Вы рациональны, структурны, надёжны, цените ясность и эффективность.</div>
+                <div class="strength">
+                    <h2>ВАША СИЛА</h2>
+                    <p id="strength">ПОРЯДОК И ПРЕДСКАЗУЕМОСТЬ.</p>
+                </div>
+                <div class="growth">
+                    <h2>ЗОНА РОСТА</h2>
+                    <p id="growth">ПОМНИТЬ, ЧТО ЗА СХЕМАМИ СТОЯТ ЛЮДИ, И ИНОГДА ВАЖНЕЕ ГИБКОСТЬ, ЧЕМ КОНТРОЛЬ.</p>
+                </div>
+            </div>
+            <div class="result__box_item form">
+                <div class="form-section">
+                    <p>ЗАПОЛНИТЕ ФОРМУ, ЧТОБЫ СКАЧАТЬ ВИДЕО (надо секси перефразировать)</p>
+                    <form>
+                        <input type="text" placeholder="ФОРМА ДЛЯ ЗАПОЛНЕНИЯ">
+                        <input type="text" placeholder="ФОРМА ДЛЯ ЗАПОЛНЕНИЯ">
+                        <input type="text" placeholder="ФОРМА ДЛЯ ЗАПОЛНЕНИЯ">
+                        <input type="text" placeholder="ФОРМА ДЛЯ ЗАПОЛНЕНИЯ">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const imagesToPreload = Array.from({ length: 15 }, (_, i) => `./img/poster/${i + 1}.png`);
+
+            imagesToPreload.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.loading = 'eager';
+                img.style.display = 'none';
+                document.body.appendChild(img);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const videosToPreload = [
+                "./video/mobile/10.mp4", "./video/mobile/15.mp4", "./video/desktop/4.mp4", "./video/desktop/13.mp4",
+                "./video/desktop/1.mp4", "./video/desktop/7.mp4", "./video/final/Вода.mp4", "./video/final/Огонь.mp4",
+                "./video/desktop/12.mp4", "./video/desktop/14.mp4", "./video/mobile/1.mp4", "./video/mobile/12.mp4",
+                "./video/desktop/9.mp4", "./video/desktop/15.mp4", "./video/mobile/7.mp4", "./video/final/Гора.mp4",
+                "./video/final/0.mp4", "./video/desktop/8.mp4", "./video/final/Земля.mp4", "./video/desktop/2.mp4",
+                "./video/desktop/3.mp4", "./video/desktop/6.mp4", "./video/desktop/11.mp4", "./video/mobile/14.mp4",
+                "./video/mobile/5.mp4", "./video/final/Дерево.mp4", "./video/mobile/2.mp4", "./video/mobile/13.mp4",
+                "./video/mobile/8.mp4", "./video/mobile/6.mp4", "./video/mobile/4.mp4", "./video/mobile/11.mp4",
+                "./video/final/Ветер.mp4", "./video/mobile/3.mp4", "./video/desktop/10.mp4", "./video/mobile/9.mp4",
+                "./video/desktop/5.mp4"
+            ];
+
+            videosToPreload.forEach(src => {
+                const video = document.createElement('video');
+                video.src = src;
+                video.preload = 'auto';
+                video.style.display = 'none';
+                document.body.appendChild(video);
+                video.load();
+            });
+        });
+
         const questions = [
             {
-                desktopTitle: 'В вашу команду<br>пришел новый<br><span>сотрудник.</span><br>Ваши <span>первые</span> действия:',
+                desktopTitle: 'В вашу команду<br>пришел новый<p><span>сотрудник.</span></p>Ваши <span>первые</span> действия:',
                 mobileTitle: 'В вашу команду<br>пришел новый<br><span>сотрудник.<br></span> Ваши <span>первые</span> действия:',
                 title: 'В вашу команду пришел новый сотрудник. Ваши первые действия:',
                 options: [
@@ -916,7 +1198,7 @@
                 ]
             },
             {
-                desktopTitle: 'Команда столкнулась<br>с серьезной<br><span>проблемой</span><br>в проекте. Ваше<br><span>первое</span> действие:',
+                desktopTitle: 'Команда столкнулась<br>с серьезной<p><span>проблемой</span></p>в проекте. Ваше<br><span>первое</span> действие:',
                 mobileTitle: 'Команда столкнулась<br>с серьезной<br><span>проблемой</span><br>в проекте. Ваше<br><span>первое</span> действие:',
                 title: 'Команда столкнулась с серьезной проблемой в проекте. Ваше первое действие:',
                 options: [
@@ -929,7 +1211,7 @@
                 ]
             },
             {
-                desktopTitle: 'При постановке<br><span>целей</span><br>команде <span>вы:</span>',
+                desktopTitle: 'При постановке<p><span>целей</span></p>команде <span>вы:</span>',
                 mobileTitle: 'При постановке<br><span>целей</span> команде <span>вы:</span>',
                 title: 'При постановке целей команде вы:',
                 options: [
@@ -942,7 +1224,7 @@
                 ]
             },
             {
-                desktopTitle: 'В вашем календаре<br><span>больше всего</span><br><span>времени</span> занимают:',
+                desktopTitle: 'В вашем календаре<p><span>больше всего</span></p><span>времени</span> занимают:',
                 mobileTitle: 'В вашем календаре<br><span>больше всего</span><br><span>времени</span> занимают:',
                 title: 'В вашем календаре больше всего времени занимают:',
                 options: [
@@ -955,7 +1237,7 @@
                 ]
             },
             {
-                desktopTitle: 'Какого сотрудника<br>вы считаете<br><span>наиболее подходящим</span><br>для <span>вашей</span> команды?',
+                desktopTitle: 'Какого сотрудника<br>вы считаете<p><span>наиболее подходящим</span></p>для <span>вашей</span> команды?',
                 mobileTitle: 'Какого сотрудника<br>вы считаете<br><span>наиболее подходящим</span><br>для <span>вашей</span> команды?',
                 title: 'Какого сотрудника вы считаете наиболее подходящим для вашей команды?',
                 options: [
@@ -968,7 +1250,7 @@
                 ]
             },
             {
-                desktopTitle: 'В ситуации<br><span>неопределенности</span><br>вы:',
+                desktopTitle: 'В ситуации<p><span>неопределенности</span></p>вы:',
                 mobileTitle: 'В ситуации<br><span>неопределенности</span><br>вы:',
                 title: 'В ситуации неопределенности вы:',
                 options: [
@@ -981,7 +1263,7 @@
                 ]
             },
             {
-                desktopTitle: 'Ваш стиль<br><span>проведения</span><br>встреч:',
+                desktopTitle: 'Ваш стиль<p><span>проведения</span></p>встреч:',
                 mobileTitle: 'Ваш стиль<br><span>проведения</span><br>встреч:',
                 title: 'Ваш стиль проведения встреч:',
                 options: [
@@ -994,7 +1276,7 @@
                 ]
             },
             {
-                desktopTitle: 'Когда нужно<br><span>принять</span><br><span>сложное</span> решение, вы:',
+                desktopTitle: 'Когда нужно<p><span>принять</span></p><span>сложное</span> решение, вы:',
                 mobileTitle: 'Когда нужно<br><span>принять</span><br><span>сложное</span> решение, вы:',
                 title: 'Когда нужно принять сложное решение, вы:',
                 options: [
@@ -1007,8 +1289,8 @@
                 ]
             },
             {
-                desktopTitle: 'В стрессовой<br>ситуации <span>вы ожидаете</span><br>от команды:',
-                mobileTitle: 'В стрессовой<br>ситуации <span>вы ожидаете</span><br>от команды:',
+                desktopTitle: 'В стрессовой<p>ситуации <span>вы ожидаете</span></p>от команды:',
+                mobileTitle: 'В стрессовой<p>ситуации <span>вы ожидаете</span></p>от команды:',
                 title: 'В стрессовой ситуации вы ожидаете от команды:',
                 options: [
                     'Действовать по инструкции<br>и не терять фокус.',
@@ -1020,7 +1302,7 @@
                 ]
             },
             {
-                desktopTitle: 'Что мотивирует вас<br><span>больше всего</span><br>в работе руководителя:',
+                desktopTitle: 'Что мотивирует вас<p><span>больше всего</span></p>в работе руководителя:',
                 mobileTitle: 'Что мотивирует вас<br><span>больше всего</span><br>в работе руководителя:',
                 title: 'Что мотивирует вас больше всего в работе руководителя:',
                 options: [
@@ -1032,21 +1314,8 @@
                     'Вести людей к достижению чего-то значимого<br>и важного'
                 ]
             },
-            // {
-            //     desktopTitle: '',
-            //     mobileTitle: '',
-            //     title: 'Как вы обычно даете обратную связь?',
-            //     options: [
-            //         'Структурно: с конкретными примерами и четким планом действий.',
-            //         'Прямо и чётко: говорю, как есть — важно быстро донести суть, даже если это жёстко.',
-            //         'Обратная связь — это поле для эксперимента: пробую разные форматы, смотрю, что сработает на человека, тестирую подходы.',
-            //         'Поддерживаю, отмечаю сильные стороны и зоны роста. Делаю это регулярно',
-            //         'Сначала слушаю, потом мягко делюсь наблюдениями — важно сохранить контакт.',
-            //         'Связываю поведение с нашими смыслами и целью — «как это влияет на общее будущее».'
-            //     ]
-            // },
             {
-                desktopTitle: 'Как вы видите<br><span>развитие сотрудников</span><br>в вашей команде?',
+                desktopTitle: 'Как вы видите<p><span>развитие сотрудников</span></p>в вашей команде?',
                 mobileTitle: 'Как вы видите<br><span>развитие сотрудников</span><br>в вашей команде?',
                 title: 'Как вы видите развитие сотрудников в вашей команде?',
                 options: [
@@ -1059,7 +1328,7 @@
                 ]
             },
             {
-                desktopTitle: 'Как вы обычно<br><span>проводите</span><br>ретроспективу <span>в команде</span>?',
+                desktopTitle: 'Как вы обычно<p><span>проводите</span></p>ретроспективу <span>в команде</span>?',
                 mobileTitle: 'Как вы обычно<br><span>проводите</span><br>ретроспективу <span>в команде</span>?',
                 title: 'Как вы обычно проводите ретроспективу в команде?',
                 options: [
@@ -1072,7 +1341,7 @@
                 ]
             },
             {
-                desktopTitle: 'Как вы решаете<br><span>конфликты</span><br>в команде?',
+                desktopTitle: 'Как вы решаете<p><span>конфликты</span></p>в команде?',
                 mobileTitle: 'Как вы решаете<br><span>конфликты</span><br>в команде?',
                 title: 'Как вы решаете конфликты в команде?',
                 options: [
@@ -1085,8 +1354,8 @@
                 ]
             },
             {
-                desktopTitle: 'Что для вас — <span>главный</span><br><span>результат</span> вашей<br>работы как лидера?',
-                mobileTitle: 'Что для вас — <span>главный</span><br><span>результат</span> вашей<br>работы как лидера?',
+                desktopTitle: 'Что для вас — <span>главный</span><p><span>результат</span> вашей</p>работы как лидера?',
+                mobileTitle: '<p class="leftP">Что для вас — <span>главный</span></p><span>результат</span> вашей<br>работы как лидера?',
                 title: 'Что для вас — главный результат вашей работы как лидера?',
                 options: [
                     'Когда всё работает без моего участия: процессы<br>отлажены, задачи идут по плану, команда автономна.',
@@ -1098,7 +1367,7 @@
                 ]
             },
             {
-                desktopTitle: 'Какую культуру вы<br><span>стремитесь</span> выстроить<br>в своей команде?',
+                desktopTitle: 'Какую культуру вы<p><span>стремитесь</span> выстроить</p>в своей команде?',
                 mobileTitle: 'Какую культуру вы<br><span>стремитесь</span> выстроить<br>в своей команде?',
                 title: 'Какую культуру вы стремитесь выстроить в своей команде?',
                 options: [
@@ -1113,12 +1382,12 @@
         ];
 
         const archetypes = {
-            'A': { name: 'Архитектор', element: 'Гора', desc: 'Вы лидер, который превращает хаос в порядок. Ваша миссия — создавать системы, которые работают стабильно и масштабируются без вас. Вы рациональны, структурны, надёжны, цените ясность и эффективность.', strength: 'Порядок и предсказуемость.', growth: 'Помнить, что за схемами стоят люди, и иногда важнее гибкость, чем контроль.' },
-            'B': { name: 'Воин', element: 'Огонь', desc: 'Вы лидер, который ведет команду через трудности с решительностью и скоростью. Ваша миссия — достигать целей несмотря на препятствия.', strength: 'Решительность и фокус на результатах.', growth: 'Иногда важно дать команде пространство для отдыха и рефлексии.' },
-            'C': { name: 'Первопроходец', element: 'Ветер', desc: 'Вы лидер, который ищет новые пути и инновации. Ваша миссия — открывать возможности и ломать шаблоны.', strength: 'Креативность и адаптивность.', growth: 'Не забывать о стабильности и рисках в инновациях.' },
-            'D': { name: 'Катализатор', element: 'Вода', desc: 'Вы лидер, который фокусируется на росте людей. Ваша миссия — помогать команде развиваться и достигать потенциала.', strength: 'Эмпатия и развитие.', growth: 'Балансировать личный рост с бизнес-целями.' },
-            'E': { name: 'Дипломат', element: 'Воздух', desc: 'Вы лидер, который строит гармонию в команде. Ваша миссия — создавать атмосферу поддержки и консенсуса.', strength: 'Командная работа и отношения.', growth: 'Иногда нужно принимать жесткие решения без консенсуса.' },
-            'F': { name: 'Провидец', element: 'Солнце', desc: 'Вы лидер, который вдохновляет миссией. Ваша миссия — вести к значимым целям и будущему.', strength: 'Вдохновение и видение.', growth: 'Связывать видение с практическими шагами.' }
+            'A': { name: 'Архитектор', element: 'Гора', desc: '<p>Вы лидер, который превращает хаос в порядок. Ваша миссия — создавать системы, которые работают стабильно и масштабируются без вас. Вы рациональны, структурны, надёжны, цените ясность и эффективность.</p><p>Архитектор похож на гору — на становится ориентиром и фундаментом, на котором можно строить. Так и вы — создаёте основу, которая даёт команде уверенность в завтрашнем дне. Ваши инструменты — KPI, схемы, инструкции и рабочие борды.</p>', strength: 'порядок и предсказуемость.', growth: 'помнить, что за схемами стоят люди, и иногда важнее гибкость, чем контроль.' },
+            'B': { name: 'Воин', element: 'Дерево', desc: 'Вы лидер, который ведёт команду вперёд, несмотря на любые препятствия. Ваша миссия — довести людей до победы в условиях стресса и высокой конкуренции.</p><p>Воин напоминает дерево: глубокие корни помогают устоять в бурю, а крона — расти вверх, несмотря на преграды.</p><p>Вы та опора, которая позволяет команде выдержать любые испытания. Команда видит в вас пример стойкости: вы быстро принимаете решения, сохраняете хладнокровие и показываете, что невозможное возможно.</p>', strength: 'решительность и выдержка', growth: 'не перегореть самому и не выжечь команду высоким темпом.' },
+            'C': { name: 'Первопроходец', element: 'Земля', desc: 'Вы лидер-исследователь, которому важно открывать новое и вести за собой. Ваша миссия — находить возможности там, где другие видят только риск. Вы смелы, гибки, быстро реагируете на изменения.</p><p>Первопроходец близок к земле — на ней всегда рождается новое. Она принимает семена экспериментов и превращает их в ростки, давая пространство для развития. Так и вы — первым создаёте путь, за которым могут следовать другие.</p><p>Ваши атрибуты — воркшопы, пробные гипотезы, внутренняя культура «fail fast – learn fast».</p>', strength: 'смелость и адаптивность.', growth: 'учиться доводить эксперименты до завершённых проектов.' },
+            'D': { name: 'Катализатор', element: 'Огонь', desc: 'Вы лидер-тренер, который раскрывает силу в каждом. Ваша миссия — помогать людям расти и превращать потенциал в результат. Вы энергичны, поддерживающи, умеете верить в других больше, чем они сами.</p><p>Катализатор похож на огонь: он даёт тепло и свет, превращая отдельные искры в мощное пламя. Так и вы — создаёте атмосферу, в которой команда горит новыми идеями и смело движется вперёд.</p><p>Команда видит в вас источник роста: вы быстро считываете сильные стороны и умеете делегировать.</p>', strength: 'вдохновлять и усиливать.', growth: 'развитие требует времени, а бизнес часто ждёт быстрых результатов.' },
+            'E': { name: 'Дипломат', element: 'Вода', desc: 'Вы лидер-коммуникатор, который превращает разрозненных людей в устойчивую команду. Ваша миссия — объединять через понимание и уважение.</p><p>Дипломат напоминает воду: она соединяет берега, сглаживает острые углы и находит путь даже в сложных условиях. Вы помогаете людям услышать друг друга, усиливаете синергию и создаёте команду, где каждый чувствует свою ценность.</p>', strength: 'создавать «мы» там, где было «я».', growth: 'учиться принимать непопулярные, но нужные решения.' },
+            'F': { name: 'Провидец', element: 'Ветер', desc: 'Вы лидер будущего, который умеет вдохновлять и вести к горизонту. Ваша миссия — помогать людям увидеть и поверить в будущее, которого они раньше не могли представить.</p><p>Провидец похож на ветер: он невидим, но ощутим и способен сдвинуть с места даже самое тяжёлое. Вы движете людей силой идей, создавая энергию. Команда рядом с вами понимает, зачем встаёт утром: вы заряжаете её, объединяете вокруг больших смыслов и меняете представления о возможном.</p>', strength: 'вдохновлять и трансформировать.', growth: 'превращать мечты в конкретные шаги и результаты.' }
         };
 
         let currentQuestion = 0;
@@ -1189,11 +1458,21 @@
 
             // For simplicity, show the max archetype, ignore hybrid etc for prototype
             const arch = archetypes[maxKey];
-            document.getElementById('archetype-title').innerText = 'ВЫ – ' + arch.name + '\n(Элемент: ' + arch.element + ')';
-            document.getElementById('archetype-desc').innerText = arch.desc;
-            document.getElementById('strength').innerText = arch.strength;
-            document.getElementById('growth').innerText = arch.growth;
+            document.getElementById('archetype-title').innerHTML = 'ВЫ – ' + arch.name + '<br><span>(Элемент: ' + arch.element + ')</span>';
 
+            document.getElementById('archetype-desc').innerHTML = arch.desc;
+            document.getElementById('strength').innerHTML = arch.strength;
+            document.getElementById('growth').innerHTML = arch.growth;
+            const videoResult = document.getElementById('result-video-source');
+            const video = document.querySelector('.bg-video');
+            const sourceResult = videoResult.querySelector('source');
+            sourceResult.src = './video/final/' + arch.element + '.mp4';
+            videoResult.load();
+
+            videoResult.muted = false;
+            videoResult.volume = 1;
+            videoResult.play();
+            video.muted = true;
             // Clear answers for next time
             answers = [];
             localStorage.removeItem('answers');
@@ -1283,10 +1562,10 @@
         loadQuestion();
 
         // Media query to show mobile/desktop intro
-        if (window.innerWidth <= 768) {
-            document.querySelector('.desktop-intro').style.display = 'none';
-            document.querySelector('.mobile-intro').style.display = 'flex';
-        }
+        //    if (window.innerWidth <= 768) {
+        //       document.querySelector('.desktop-intro').style.display = 'none';
+        //       document.querySelector('.mobile-intro').style.display = 'flex';
+        //   }
     </script>
 </body>
 
