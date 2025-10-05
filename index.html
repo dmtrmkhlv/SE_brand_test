@@ -1192,6 +1192,25 @@
             }
         }
 
+        document.addEventListener('DOMContentLoaded', function () {
+            // const videosToPreload = [
+            //     "./video/final/water.mp4",
+            //     "./video/final/flame.mp4",
+            //     "./video/final/mountain.mp4",
+            //     "./video/final/earth.mp4",
+            //     "./video/final/tree.mp4",
+            //     "./video/final/wind.mp4"
+            // ];
+
+            // videosToPreload.forEach(src => {
+            //     const video = document.createElement('video');
+            //     video.src = src;
+            //     video.preload = 'auto';
+            //     video.style.display = 'none';
+            //     document.body.appendChild(video);
+            //     video.load();
+            // });
+        });
 
 
         // Функция для предзагрузки одного изображения
@@ -1570,7 +1589,7 @@
             firstVideo.addEventListener('progress', () => {
                 if (videoDuration > 0 && firstVideo.buffered.length > 0) {
                     const buffered = firstVideo.buffered.end(0);
-                    console.log(buffered);
+                    // console.log(buffered);
 
                     const videoPercent = (buffered / videoDuration) * 50;
                     updateProgress((imageLoaded ? 50 : 0) + videoPercent);
