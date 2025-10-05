@@ -156,6 +156,7 @@
             font-size: 20px;
             font-size: 28px;
             font-size: 24px;
+            font-size: 1em;
             line-height: 110%;
             letter-spacing: 0;
             vertical-align: middle;
@@ -175,6 +176,7 @@
             font-size: 20px;
             font-size: 28px;
             font-size: 24px;
+            font-size: 1em;
             line-height: 110%;
             letter-spacing: 0;
             text-transform: uppercase;
@@ -270,6 +272,7 @@
             font-size: 12px;
             font-size: 16px;
             font-size: 14px;
+            font-size: .8em;
             line-height: 120%;
             letter-spacing: 0;
         }
@@ -980,11 +983,59 @@
 
 
         }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999999;
+        }
+
+        #progress-bar {
+            width: 300px;
+            height: 20px;
+            background: #000;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #fff;
+            padding: 2px;
+        }
+
+        #progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(to right, #000, #888, #fff);
+            transition: width 0.5s ease-in-out;
+            border-radius: 20px;
+        }
+
+        #progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000;
+            font-size: 12px;
+            font-family: sans-serif;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container" id="quiz">
+    <div id="preloader">
+        <div id="progress-bar">
+            <div id="progress-fill"></div>
+            <span id="progress-text">0%</span>
+        </div>
+    </div>
+    <div class="container" id="quiz" style="display: none;">
         <div class="left">
             <div class="header-left">
                 <div id="unmute" class="icon headphones"></div>
@@ -1033,7 +1084,7 @@
         <div class="footer-right" id="progress">1/15</div>
     </div>
 
-    <div id="intro">
+    <div id="intro" style="display: none;">
         <div class="intro_logo">
             <img src="./img/SE_logo.svg" alt="Logo">
         </div>
@@ -1084,7 +1135,7 @@
         </div>
     </div>
 
-    <div id="result" class="container">
+    <div id="result" class="container" style="display: none;">
         <div class="intro_logo">
             <img src="./img/SE_logo.svg" alt="Logo">
         </div>
@@ -1113,12 +1164,12 @@
             </div>
             <div class="result__box_item form">
                 <div class="form-section">
-                    <p>ЗАПОЛНИТЕ ФОРМУ, ЧТОБЫ СКАЧАТЬ ВИДЕО (надо секси перефразировать)</p>
+                    <p>Оставьте ваши данные и скачайте результат в формате видео.</p><br>
+                    <p>Так вы сможете шеритьего в ваших социальных сетях!</p>
                     <form>
-                        <input type="text" placeholder="ФОРМА ДЛЯ ЗАПОЛНЕНИЯ">
-                        <input type="text" placeholder="ФОРМА ДЛЯ ЗАПОЛНЕНИЯ">
-                        <input type="text" placeholder="ФОРМА ДЛЯ ЗАПОЛНЕНИЯ">
-                        <input type="text" placeholder="ФОРМА ДЛЯ ЗАПОЛНЕНИЯ">
+                        <input type="text" placeholder="ИМЯ ФАМИЛИЯ" required>
+                        <input type="email" placeholder="EMAIL" required>
+                        <input type="phone" placeholder="+7 (000) 000-00-00" required>
                     </form>
                 </div>
             </div>
@@ -1126,34 +1177,34 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const videosToPreload = [
-                "./video/final/water.mp4",
-                "./video/final/flame.mp4",
-                "./video/final/mountain.mp4",
-                "./video/final/earth.mp4",
-                "./video/final/tree.mp4",
-                "./video/final/wind.mp4"
-            ];
 
-            videosToPreload.forEach(src => {
-                const video = document.createElement('video');
-                video.src = src;
-                video.preload = 'auto';
-                video.style.display = 'none';
-                document.body.appendChild(video);
-                video.load();
-            });
-        });
+        // Функция для обновления прогресс-бара
+        function updateProgress(percent) {
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('progress-text').innerText = Math.round(percent) + '%';
+        }
 
+        // Проверка, загружены ли оба ресурса
+        function checkLoaded() {
+            if (imageLoaded && videoLoaded) {
+                document.getElementById('preloader').style.display = 'none';
+                loadQuestion(); // Показываем стартовую страницу
+            }
+        }
+
+
+
+        // Функция для предзагрузки одного изображения
         function preloadImage(src) {
             const img = document.createElement('img');
             img.src = src;
             img.loading = 'eager';
             img.style.display = 'none';
             document.body.appendChild(img);
+            return img;
         }
 
+        // Функция для предзагрузки одного видео
         function preloadVideo(src) {
             const video = document.createElement('video');
             video.src = src;
@@ -1161,6 +1212,7 @@
             video.style.display = 'none';
             document.body.appendChild(video);
             video.load();
+            return video;
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -1314,8 +1366,8 @@
                 ]
             },
             {
-                desktopTitle: 'Как вы обычно<p><span>проводите</span></p>ретроспективу <span>в команде</span>?',
-                mobileTitle: 'Как вы обычно<br><span>проводите</span><br>ретроспективу <span>в команде</span>?',
+                desktopTitle: 'Как вы обычно<p><span>проводите</span></p>ретроспективу <br><span>в команде</span>?',
+                mobileTitle: 'Как вы обычно<br><span>проводите</span><br>ретроспективу <br><span>в команде</span>?',
                 title: 'Как вы обычно проводите ретроспективу в команде?',
                 options: [
                     'По заранее подготовленной структуре<br>и фиксируем все решения.',
@@ -1345,7 +1397,7 @@
                 title: 'Что для вас — главный результат вашей работы как лидера?',
                 options: [
                     'Когда всё работает без моего участия: процессы<br>отлажены, задачи идут по плану, команда автономна.',
-                    'Когда цель достигнута — несмотря<br>на трудности, неопределённость и ограничения.',
+                    'Когда цель достигнута — несмотря<br>на трудности, неопределённость <br>и ограничения.',
                     'Когда мы сделали то, что раньше казалось<br>невозможным, — вышли за пределы привычного.',
                     'Когда вижу, как человек вырос, поверил в себя<br>и стал двигаться увереннее.',
                     'Когда каждый в команде чувствует себя нужным<br>и полезным, услышанным и вовлеченным',
@@ -1362,13 +1414,13 @@
                     'Исследовательскую, где каждый может<br>предложить новое и попробовать.',
                     'Культуру роста, где люди учатся, делятся опытом<br>и развиваются вместе.',
                     'Тёплую, доверительную, где ценится<br>командность и взаимная поддержка.',
-                    'Вдохновляющую, объединённую идеей и мечтой,<br>которая больше нас самих.'
+                    'Вдохновляющую, объединённую идеей <br>и мечтой, которая больше нас самих.'
                 ]
             }
         ];
 
         const archetypes = {
-            'A': { name: 'Архитектор', element: 'Гора', file: 'mountain', desc: '<p>Вы лидер, который превращает хаос в порядок. Ваша миссия — создавать системы, которые работают стабильно и масштабируются без вас. Вы рациональны, структурны, надёжны, цените ясность и эффективность.</p><p>Архитектор похож на гору — на становится ориентиром и фундаментом, на котором можно строить. Так и вы — создаёте основу, которая даёт команде уверенность в завтрашнем дне. Ваши инструменты — KPI, схемы, инструкции и рабочие борды.</p>', strength: 'порядок и предсказуемость.', growth: 'помнить, что за схемами стоят люди, и иногда важнее гибкость, чем контроль.' },
+            'A': { name: 'Архитектор', element: 'Гора', file: 'mountain', desc: '<p>Вы лидер, который превращает хаос в&nbsp;порядок. Ваша миссия — создавать системы, которые работают стабильно и&nbsp;масштабируются без вас. Вы рациональны, структурны, надёжны, цените ясность и&nbsp;эффективность.</p><p>Архитектор похож на гору — на становится ориентиром и фундаментом, на&nbsp;котором можно строить. Так и&nbsp;вы — создаёте основу, которая даёт команде уверенность в&nbsp;завтрашнем дне. Ваши инструменты — KPI, схемы, инструкции <br>и&nbsp;рабочие борды.</p>', strength: 'порядок и предсказуемость.', growth: 'помнить, что за&nbsp;схемами стоят люди, <br>и&nbsp;иногда важнее гибкость, чем контроль.' },
             'B': { name: 'Воин', element: 'Дерево', file: 'tree', desc: 'Вы лидер, который ведёт команду вперёд, несмотря на любые препятствия. Ваша миссия — довести людей до победы в условиях стресса и высокой конкуренции.</p><p>Воин напоминает дерево: глубокие корни помогают устоять в бурю, а крона — расти вверх, несмотря на преграды.</p><p>Вы та опора, которая позволяет команде выдержать любые испытания. Команда видит в вас пример стойкости: вы быстро принимаете решения, сохраняете хладнокровие и показываете, что невозможное возможно.</p>', strength: 'решительность и выдержка', growth: 'не перегореть самому и не выжечь команду высоким темпом.' },
             'C': { name: 'Первопроходец', element: 'Земля', file: 'earth', desc: 'Вы лидер-исследователь, которому важно открывать новое и вести за собой. Ваша миссия — находить возможности там, где другие видят только риск. Вы смелы, гибки, быстро реагируете на изменения.</p><p>Первопроходец близок к земле — на ней всегда рождается новое. Она принимает семена экспериментов и превращает их в ростки, давая пространство для развития. Так и вы — первым создаёте путь, за которым могут следовать другие.</p><p>Ваши атрибуты — воркшопы, пробные гипотезы, внутренняя культура «fail fast – learn fast».</p>', strength: 'смелость и адаптивность.', growth: 'учиться доводить эксперименты до завершённых проектов.' },
             'D': { name: 'Катализатор', element: 'Огонь', file: 'flame', desc: 'Вы лидер-тренер, который раскрывает силу в каждом. Ваша миссия — помогать людям расти и превращать потенциал в результат. Вы энергичны, поддерживающи, умеете верить в других больше, чем они сами.</p><p>Катализатор похож на огонь: он даёт тепло и свет, превращая отдельные искры в мощное пламя. Так и вы — создаёте атмосферу, в которой команда горит новыми идеями и смело движется вперёд.</p><p>Команда видит в вас источник роста: вы быстро считываете сильные стороны и умеете делегировать.</p>', strength: 'вдохновлять и усиливать.', growth: 'развитие требует времени, а бизнес часто ждёт быстрых результатов.' },
@@ -1378,13 +1430,15 @@
 
         let currentQuestion = 0;
         let answers = JSON.parse(localStorage.getItem('answers')) || [];
+        let imageLoaded = false;
+        let videoLoaded = false;
+        let videoDuration = 0;
 
         function loadQuestion() {
             if (currentQuestion === 0) {
                 const video = document.querySelector('.bg-video');
                 video.muted = false;
                 video.volume = 1;
-
                 document.getElementById('intro').style.display = 'flex';
                 document.getElementById('quiz').style.display = 'none';
                 document.getElementById('result').style.display = 'none';
@@ -1401,15 +1455,16 @@
             const q = questions[currentQuestion - 1];
             document.getElementById('question-title-desktop').innerHTML = q.desktopTitle;
             document.getElementById('question-title-mobile').innerHTML = q.mobileTitle;
-
             for (let i = 1; i <= 6; i++) {
                 document.getElementById('option' + i).innerHTML = q.options[i - 1].replace(/\n/g, '<br>');
             }
             document.getElementById('progress').innerText = currentQuestion + '/15';
 
+            // Установка текущего постера и видео
             document.getElementById('bg-poster').src = './img/poster/' + currentQuestion + '.png';
             setVideoSource();
 
+            // Предзагрузка следующего видео и постера (если не последний вопрос)
             if (currentQuestion < 15) {
                 const isMobile = window.innerWidth <= 768;
                 preloadImage(`./img/poster/${currentQuestion + 1}.png`);
@@ -1421,20 +1476,18 @@
                 const index = prev.charCodeAt(0) - 'A'.charCodeAt(0);
                 document.querySelectorAll('.option')[index].classList.remove('inactive');
                 document.querySelectorAll('.option').forEach((o, i) => { if (i !== index) o.classList.add('inactive'); });
-                buttonNext.style.visibility = 'visible';
+                document.getElementById('buttonNext').style.visibility = 'visible';
             } else {
                 document.querySelectorAll('.option').forEach(o => o.classList.remove('inactive'));
-                buttonNext.style.visibility = 'hidden';
+                document.getElementById('buttonNext').style.visibility = 'hidden';
             }
         }
 
         function calculateResult() {
             document.getElementById('quiz').style.display = 'none';
             document.getElementById('result').style.display = 'flex';
-
             const counts = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
             answers.forEach(a => counts[a]++);
-
             let max = 0;
             let maxKey = '';
             for (let key in counts) {
@@ -1443,26 +1496,20 @@
                     maxKey = key;
                 }
             }
-
             const arch = archetypes[maxKey];
-
-            document.getElementById('archetype-title-mobile').innerHTML = 'ВЫ – ' + arch.name + '<br><span>(Элемент: ' + arch.element + ')</span>';
             document.getElementById('archetype-title').innerHTML = 'ВЫ – ' + arch.name + '<br><span>(Элемент: ' + arch.element + ')</span>';
-
             document.getElementById('archetype-desc').innerHTML = arch.desc;
             document.getElementById('strength').innerHTML = arch.strength;
             document.getElementById('growth').innerHTML = arch.growth;
             const videoResult = document.getElementById('result-video-source');
             const video = document.querySelector('.bg-video');
             const sourceResult = videoResult.querySelector('source');
-            sourceResult.src = './video/final/' + arch.file + '.mp4';
+            sourceResult.src = './video/final/' + arch.element + '.mp4';
             videoResult.load();
-
             videoResult.muted = false;
             videoResult.volume = 1;
             videoResult.play();
             video.muted = true;
-
             answers = [];
             localStorage.removeItem('answers');
         }
@@ -1471,7 +1518,6 @@
             const video = document.querySelector('.bg-video');
             const poster = document.querySelector('.bg-poster');
             const source = video.querySelector('source');
-
             window.setVideoSource = function () {
                 if (currentQuestion === 0 || currentQuestion > 15) return;
                 if (window.innerWidth <= 768) {
@@ -1481,15 +1527,12 @@
                 }
                 video.load();
             }
-
             setVideoSource();
-
             video.addEventListener('canplay', function () {
                 poster.classList.add('inactive');
                 video.classList.add('active');
                 video.play();
             });
-
             video.addEventListener('error', function () {
                 poster.classList.remove('inactive');
                 video.classList.remove('active');
@@ -1502,11 +1545,60 @@
                 poster.classList.remove('inactive');
                 video.classList.remove('active');
             });
-
             let resizeTimeout;
             window.addEventListener('resize', function () {
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(setVideoSource, 300);
+            });
+
+            // Предзагрузка первого видео и постера
+            const isMobile = window.innerWidth <= 768;
+            const firstVideoSrc = isMobile ? './video/mobile/1.mp4' : './video/desktop/1.mp4';
+            const firstVideo = preloadVideo(firstVideoSrc);
+            const firstPoster = preloadImage('./img/poster/1.png');
+
+            firstPoster.addEventListener('load', () => {
+                imageLoaded = true;
+                updateProgress(50);
+                checkLoaded();
+            });
+
+            firstVideo.addEventListener('loadedmetadata', () => {
+                videoDuration = firstVideo.duration;
+            });
+
+            firstVideo.addEventListener('progress', () => {
+                if (videoDuration > 0 && firstVideo.buffered.length > 0) {
+                    const buffered = firstVideo.buffered.end(0);
+                    console.log(buffered);
+
+                    const videoPercent = (buffered / videoDuration) * 50;
+                    updateProgress((imageLoaded ? 50 : 0) + videoPercent);
+                }
+            });
+
+            firstVideo.addEventListener('canplaythrough', () => {
+                videoLoaded = true;
+                updateProgress(100);
+                checkLoaded();
+            });
+
+            const videosToPreload = [
+                "./video/final/water.mp4",
+                "./video/final/flame.mp4",
+                "./video/final/mountain.mp4",
+                "./video/final/earth.mp4",
+                "./video/final/tree.mp4",
+                "./video/final/wind.mp4"
+            ];
+
+            videosToPreload.forEach(src => {
+                const video = document.createElement('video');
+                video.src = src;
+                video.preload = 'auto';
+                video.style.display = 'none';
+                document.body.appendChild(video);
+                video.load();
             });
         });
 
@@ -1545,8 +1637,6 @@
                 loadQuestion();
             });
         }
-
-        loadQuestion();
 
     </script>
 </body>
