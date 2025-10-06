@@ -1132,7 +1132,7 @@
             height: 100%;
             width: 0;
             background: linear-gradient(to right, #000, #888, #fff);
-            transition: width 0.5s ease-in-out;
+            transition: width 0.1s ease-in-out;
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -1200,7 +1200,7 @@
         <div class="right">
             <img id="bg-poster" src="./img/poster/1.png" alt="Poster" class="bg-poster">
             <video autoplay loop muted playsinline preload="auto" class="bg-video">
-                <source id="video-source" src="./video/desktop/1.mp4" type="video/mp4">
+                <source id="video-source" src="./video/final/plug.mp4" type="video/mp4">
                 Ваш браузер не поддерживает видео.
             </video>
         </div>
@@ -1312,45 +1312,6 @@
     </div>
 
     <script>
-        let pageLoadedProgress = 0;
-        let pageLoaded = false;
-
-        function updateProgress(pagePercent, imagePercent, videoPercent) {
-            const totalPercent = (pagePercent * 0.3333) + (imagePercent * 0.3333) + (videoPercent * 0.3333);
-            document.getElementById('progress-fill').style.width = totalPercent + '%';
-            document.getElementById('progress-text').innerText = Math.round(totalPercent) + '%';
-        }
-
-        function checkLoaded() {
-            if (imageLoaded && videoLoaded && pageLoaded) {
-                document.getElementById('preloader').style.display = 'none';
-                loadQuestion();
-            }
-        }
-
-        function preloadImage(src) {
-            const img = document.createElement('img');
-            img.src = src;
-            img.loading = 'eager';
-            img.style.display = 'none';
-            document.body.appendChild(img);
-            return img;
-        }
-
-        function preloadVideo(src, callback) {
-            const video = document.createElement('video');
-            video.src = src;
-            video.preload = 'auto';
-            video.style.display = 'none';
-            document.body.appendChild(video);
-            video.load();
-            if (callback) {
-                video.addEventListener('canplaythrough', () => {
-                    callback();
-                }, { once: true });
-            }
-            return video;
-        }
 
         const questions = [
             {
@@ -1559,11 +1520,122 @@
             'F': { name: 'Провидец', element: 'Ветер', file: 'wind', desc: '<p>Вы лидер будущего, который умеет вдохновлять и вести к горизонту. Ваша миссия — помогать людям увидеть и поверить в будущее, которого они раньше не могли представить.</p><p>Провидец похож на ветер: он невидим, но ощутим и способен сдвинуть с места даже самое тяжёлое. Вы движете людей силой идей, создавая энергию. Команда рядом с вами понимает, зачем встаёт утром: вы заряжаете её, объединяете вокруг больших смыслов и меняете представления о возможном.</p>', strength: 'вдохновлять и трансформировать.', growth: 'превращать мечты в конкретные шаги и результаты.' }
         };
 
-        let currentQuestion = 0;
-        let answers = JSON.parse(localStorage.getItem('answers')) || [];
+        const videoCache = {};
+        const imageCache = {};
         let imageLoaded = false;
         let videoLoaded = false;
+        let videoProgress = 0;
         let videoDuration = 0;
+        let pageLoaded = false;
+
+        function updateProgress() {
+            const pagePercent = pageLoaded ? 100 : 0;
+            const imagePercent = imageLoaded ? 100 : 0;
+            const videoPercent = videoLoaded ? 100 : videoProgress;
+            const totalPercent = (pagePercent * 0.3333) + (imagePercent * 0.3333) + (videoPercent * 0.3333);
+            document.getElementById('progress-fill').style.width = totalPercent + '%';
+            document.getElementById('progress-text').innerText = Math.round(totalPercent) + '%';
+        }
+
+        function checkLoaded() {
+            if (imageLoaded && videoLoaded && pageLoaded) {
+                document.getElementById('preloader').style.display = 'none';
+                loadQuestion();
+            }
+        }
+
+        function preloadImage(src) {
+            if (imageCache[src]) {
+                return Promise.resolve(imageCache[src]);
+            }
+            return fetch(src, { cache: 'force-cache' })
+                .then(r => {
+                    if (!r.ok) throw new Error('Failed to fetch image');
+                    return r.blob();
+                })
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    imageCache[src] = url;
+                    return new Promise((resolve, reject) => {
+                        const img = new Image();
+                        img.onload = () => resolve(url);
+                        img.onerror = () => {
+                            URL.revokeObjectURL(url);
+                            reject(new Error('Image load failed'));
+                        };
+                        img.src = url;
+                    });
+                })
+                .catch(err => {
+                    console.error('Ошибка предзагрузки изображения:', src, err);
+                    return src;
+                });
+        }
+
+        function preloadVideo(src, onProgress = null) {
+            if (videoCache[src]) {
+                if (onProgress) onProgress(100);
+                return Promise.resolve(videoCache[src]);
+            }
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', src, true);
+                xhr.responseType = 'blob';
+
+                if (onProgress) {
+                    xhr.addEventListener('progress', (e) => {
+                        if (e.lengthComputable) {
+                            const percent = (e.loaded / e.total) * 100;
+                            onProgress(percent);
+                        }
+                    });
+                }
+
+                xhr.addEventListener('load', () => {
+                    if (xhr.status === 200) {
+                        const blob = xhr.response;
+                        const url = URL.createObjectURL(blob);
+                        videoCache[src] = url;
+                        if (onProgress) onProgress(100);
+
+                        const tempVideo = document.createElement('video');
+                        tempVideo.style.display = 'none';
+                        tempVideo.preload = 'auto';
+                        document.body.appendChild(tempVideo);
+                        tempVideo.src = url;
+                        tempVideo.addEventListener('loadedmetadata', () => {
+                            videoDuration = tempVideo.duration;
+                        }, { once: true });
+                        tempVideo.load();
+
+
+                        setTimeout(() => {
+                            document.body.removeChild(tempVideo);
+                        }, 100);
+
+                        resolve(url);
+                    } else {
+                        reject(new Error(`HTTP ${xhr.status}`));
+                    }
+                });
+
+                xhr.addEventListener('error', () => {
+                    reject(new Error('Network error'));
+                });
+
+                xhr.addEventListener('timeout', () => {
+                    reject(new Error('Timeout'));
+                });
+
+                xhr.send();
+            }).catch(err => {
+                console.error('Ошибка предзагрузки видео:', src, err);
+                return src;
+            });
+        }
+
+        let currentQuestion = 0;
+        let answers = JSON.parse(localStorage.getItem('answers')) || [];
 
         function loadQuestion() {
             if (currentQuestion === 0) {
@@ -1591,15 +1663,17 @@
             }
             document.getElementById('progress').innerText = currentQuestion + '/15';
 
-            document.getElementById('bg-poster').src = './img/poster/' + currentQuestion + '.png';
+            const posterPath = `./img/poster/${currentQuestion}.png`;
+            document.getElementById('bg-poster').src = imageCache[posterPath] || posterPath;
+
             setVideoSource();
 
             if (currentQuestion < 15) {
                 const isMobile = window.innerWidth <= 768;
                 preloadImage(`./img/poster/${currentQuestion + 1}.png`);
-                const nextVideoSrc = isMobile ? `./video/mobile/${currentQuestion + 1}.mp4` : `./video/desktop/${currentQuestion + 1}.mp4`;
 
-                preloadVideo(nextVideoSrc, () => {
+                const nextVideoSrc = isMobile ? `./video/mobile/${currentQuestion + 1}.mp4` : `./video/desktop/${currentQuestion + 1}.mp4`;
+                preloadVideo(nextVideoSrc).then(() => {
                     const videosToPreload = [
                         "./video/final/water.mp4",
                         "./video/final/flame.mp4",
@@ -1610,10 +1684,10 @@
                     ];
                     const videoIndex = currentQuestion - 1;
                     if (videoIndex >= 0 && videoIndex < videosToPreload.length) {
-                        const src = videosToPreload[videoIndex];
-                        preloadVideo(src);
+                        const finalSrc = videosToPreload[videoIndex];
+                        preloadVideo(finalSrc);
                     }
-                });
+                }).catch(err => console.error('Ошибка предзагрузки next видео:', err));
             }
 
             const prev = answers[currentQuestion - 1];
@@ -1649,7 +1723,8 @@
             const videoResult = document.getElementById('result-video-source');
             const video = document.querySelector('.bg-video');
             const sourceResult = videoResult.querySelector('source');
-            sourceResult.src = './video/final/' + arch.file + '.mp4';
+            const finalPath = `./video/final/${arch.file}.mp4`;
+            sourceResult.src = videoCache[finalPath] || finalPath;
             videoResult.load();
             videoResult.muted = false;
             videoResult.volume = 1;
@@ -1664,16 +1739,17 @@
             const video = document.querySelector('.bg-video');
             const poster = document.querySelector('.bg-poster');
             const source = video.querySelector('source');
+
             window.setVideoSource = function () {
                 if (currentQuestion === 0 || currentQuestion > 15) return;
-                if (window.innerWidth <= 768) {
-                    source.src = './video/mobile/' + currentQuestion + '.mp4';
-                } else {
-                    source.src = './video/desktop/' + currentQuestion + '.mp4';
-                }
+                const isMobile = window.innerWidth <= 768;
+                const videoPath = isMobile ? `./video/mobile/${currentQuestion}.mp4` : `./video/desktop/${currentQuestion}.mp4`;
+                source.src = videoCache[videoPath] || videoPath;
                 video.load();
-            }
+            };
+
             setVideoSource();
+
             video.addEventListener('canplay', function () {
                 poster.classList.add('inactive');
                 video.classList.add('active');
@@ -1691,6 +1767,7 @@
                 poster.classList.remove('inactive');
                 video.classList.remove('active');
             });
+
             let resizeTimeout;
             window.addEventListener('resize', function () {
                 clearTimeout(resizeTimeout);
@@ -1699,124 +1776,81 @@
 
             const isMobile = window.innerWidth <= 768;
             const firstVideoSrc = isMobile ? './video/mobile/1.mp4' : './video/desktop/1.mp4';
-            const firstVideo = preloadVideo(firstVideoSrc);
-            const firstPoster = preloadImage('./img/poster/1.png');
+            const firstPosterSrc = './img/poster/1.png';
 
-
-            let pageLoadedProgress = 0;
-            const resources = performance.getEntriesByType('resource');
-            const totalResources = resources.length || 1;
-            let loadedResources = 0;
-
-            const updatePageProgress = () => {
-                pageLoadedProgress = (loadedResources / totalResources) * 100;
-                updateProgress(pageLoadedProgress, imageLoaded ? 100 : 0, videoLoaded ? 100 : (videoDuration > 0 && firstVideo.buffered.length > 0 ? (firstVideo.buffered.end(0) / videoDuration) * 100 : 0));
-            };
-
-            resources.forEach(resource => {
-                const img = resource.initiatorType === 'img' ? preloadImage(resource.name) : null;
-                const video = resource.initiatorType === 'video' ? preloadVideo(resource.name) : null;
-                if (img) {
-                    img.addEventListener('load', () => {
-                        loadedResources++;
-                        updatePageProgress();
-                    });
-                    img.addEventListener('error', () => {
-                        loadedResources++;
-                        updatePageProgress();
-                    });
-                } else if (video) {
-                    video.addEventListener('canplaythrough', () => {
-                        loadedResources++;
-                        updatePageProgress();
-                    });
-                    video.addEventListener('error', () => {
-                        loadedResources++;
-                        updatePageProgress();
-                    });
-                } else {
-                    loadedResources++;
-                    updatePageProgress();
-                }
-            });
-
-            if (document.readyState === 'complete') {
+            const handlePageLoad = () => {
                 pageLoaded = true;
-                pageLoadedProgress = 100;
-                updatePageProgress();
+                updateProgress();
                 checkLoaded();
+            };
+            if (document.readyState === 'complete') {
+                handlePageLoad();
             } else {
-                window.addEventListener('load', () => {
-                    pageLoaded = true;
-                    pageLoadedProgress = 100;
-                    updatePageProgress();
-                    checkLoaded();
-                });
+                window.addEventListener('load', handlePageLoad);
             }
 
-            firstPoster.addEventListener('load', () => {
+            preloadImage(firstPosterSrc).then(() => {
                 imageLoaded = true;
-                updatePageProgress();
+                updateProgress();
+                checkLoaded();
+            }).catch(() => {
+                imageLoaded = true;
+                updateProgress();
                 checkLoaded();
             });
 
-            firstVideo.addEventListener('loadedmetadata', () => {
-                videoDuration = firstVideo.duration;
-            });
-
-            firstVideo.addEventListener('progress', () => {
-                if (videoDuration > 0 && firstVideo.buffered.length > 0) {
-                    const buffered = firstVideo.buffered.end(0);
-                    updatePageProgress();
-                }
-            });
-
-            firstVideo.addEventListener('canplaythrough', () => {
+            const handleVideoProgress = (percent) => {
+                videoProgress = percent;
+                updateProgress();
+            };
+            preloadVideo(firstVideoSrc, handleVideoProgress).then(() => {
                 videoLoaded = true;
-                updatePageProgress();
+                videoProgress = 100;
+                updateProgress();
+                checkLoaded();
+            }).catch(() => {
+                videoLoaded = true;
+                videoProgress = 100;
+                updateProgress();
                 checkLoaded();
             });
 
-        });
-
-
-        document.getElementById('unmute').addEventListener('click', function () {
-            const video = document.querySelector('.bg-video');
-            video.muted = false;
-            video.volume = 1;
-            video.play();
-        });
-
-        const buttonNext = document.getElementById('buttonNext');
-        document.querySelectorAll('.options .option').forEach((option, index) => {
-            option.addEventListener('click', function () {
-                buttonNext.style.visibility = 'visible';
-                document.querySelectorAll('.options .option').forEach(o => o.classList.add('inactive'));
-                this.classList.remove('inactive');
-                const letter = String.fromCharCode('A'.charCodeAt(0) + index);
-                answers[currentQuestion - 1] = letter;
-                localStorage.setItem('answers', JSON.stringify(answers));
+            document.getElementById('unmute').addEventListener('click', function () {
+                const video = document.querySelector('.bg-video');
+                video.muted = false;
+                video.volume = 1;
+                video.play();
             });
-        });
 
-        buttonNext.addEventListener('click', function () {
-            currentQuestion++;
-            loadQuestion();
-        });
+            const buttonNext = document.getElementById('buttonNext');
+            document.querySelectorAll('.options .option').forEach((option, index) => {
+                option.addEventListener('click', function () {
+                    buttonNext.style.visibility = 'visible';
+                    document.querySelectorAll('.options .option').forEach(o => o.classList.add('inactive'));
+                    this.classList.remove('inactive');
+                    const letter = String.fromCharCode('A'.charCodeAt(0) + index);
+                    answers[currentQuestion - 1] = letter;
+                    localStorage.setItem('answers', JSON.stringify(answers));
+                });
+            });
 
-        document.getElementById('start-test').addEventListener('click', function () {
-            currentQuestion = 1;
-            loadQuestion();
-        });
+            buttonNext.addEventListener('click', function () {
+                currentQuestion++;
+                loadQuestion();
+            });
 
-        if (document.getElementById('start-test-mobile')) {
-            document.getElementById('start-test-mobile').addEventListener('click', function () {
+            document.getElementById('start-test').addEventListener('click', function () {
                 currentQuestion = 1;
                 loadQuestion();
             });
-        }
 
-        document.addEventListener('DOMContentLoaded', function () {
+            if (document.getElementById('start-test-mobile')) {
+                document.getElementById('start-test-mobile').addEventListener('click', function () {
+                    currentQuestion = 1;
+                    loadQuestion();
+                });
+            }
+
             const form = document.getElementById('result-form');
             const inputs = form.querySelectorAll('input');
             const submitBtn = form.querySelector('button[type="submit"]');
@@ -1965,7 +1999,6 @@
             });
 
         });
-
     </script>
 </body>
 
