@@ -457,6 +457,10 @@
                 border-radius: 16px;
             }
 
+            .button-next.submit {
+                position: unset;
+            }
+
             .button-next p {
                 font-size: 9px;
                 padding-top: 3px;
@@ -533,8 +537,8 @@
             .headphones {
                 width: 11px;
                 height: 11px;
-                min-width: 11px;
-                min-height: 11px;
+                min-width: 16px;
+                min-height: 16px;
                 background-image: url('./img/headphones_w.svg');
             }
 
@@ -548,6 +552,8 @@
                 font-size: 11px;
             }
         }
+
+
 
         #intro {
             display: flex;
@@ -841,6 +847,76 @@
             }
         }
 
+        @media (max-width: 768px) and (orientation: landscape) {
+            .container {
+                flex-direction: row;
+            }
+
+            .mobile-title {
+                margin-top: 30px;
+                font-size: .8em;
+            }
+
+            .intro_logo {
+                position: absolute;
+                top: calc((30 / 780) * 100%);
+                left: calc((360 / 1200) * 100%);
+            }
+
+            .position1 {
+                position: absolute;
+                top: calc((104 / 780) * 100%);
+                left: calc((224 / 1200) * 100%);
+            }
+
+            .position2 {
+                position: absolute;
+                top: calc((155 / 780) * 100%);
+                right: calc((63 / 1200) * 100%);
+            }
+
+            .position3 {
+                position: absolute;
+                top: calc((353 / 780) * 100%);
+                left: calc((366 / 1200) * 100%);
+            }
+
+            .position4 {
+                position: absolute;
+                bottom: calc((112 / 780) * 100%);
+                left: calc((46 / 1200) * 100%);
+            }
+
+            .position5 {
+                position: absolute;
+                bottom: calc((1 / 780) * 100%);
+                left: calc((830 / 1200) * 100%);
+                left: calc((366 / 1200) * 100%);
+            }
+
+            #intro .desktop-intro_text {
+                position: absolute;
+                top: 427px;
+                left: 600px;
+                top: calc((427 / 780) * 100%);
+                left: calc((600 / 1200) * 100%);
+            }
+
+            #intro .desktop-intro h1 {
+
+                vertical-align: bottom;
+                text-transform: uppercase;
+                position: absolute;
+                top: calc((279 / 780) * 100%);
+                left: calc((360 / 1200) * 100%);
+            }
+
+            #start-test {
+                margin-top: 0;
+            }
+
+        }
+
         #result {
             display: none;
             flex-direction: column;
@@ -1013,6 +1089,10 @@
 
             #result h1 span {
                 font-size: 20px;
+            }
+
+            #result form .error {
+                bottom: -1px;
             }
 
 
@@ -1226,6 +1306,9 @@
     </div>
 
     <script>
+        let pageLoadedProgress = 0;
+        let pageLoaded = false;
+
         // Функция для обновления прогресс-бара
         function updateProgress(pagePercent, imagePercent, videoPercent) {
             const totalPercent = (pagePercent * 0.3333) + (imagePercent * 0.3333) + (videoPercent * 0.3333);
@@ -1479,7 +1562,6 @@
         let answers = JSON.parse(localStorage.getItem('answers')) || [];
         let imageLoaded = false;
         let videoLoaded = false;
-        let pageLoaded = false;
         let videoDuration = 0;
 
         function loadQuestion() {
