@@ -332,6 +332,12 @@
             height: 40px;
             color: #000;
             visibility: visible;
+            border-radius: 20px;
+        }
+
+        .button-next.submit::before,
+        .button-next.submit::after {
+            display: none;
         }
 
         .button-next.submit:disabled {
@@ -1092,7 +1098,7 @@
             }
 
             #result form .error {
-                bottom: -1px;
+                bottom: -2px;
             }
 
 
@@ -1928,6 +1934,8 @@
                     video: videoLink
                 };
 
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<p>Отправка...</p>';
                 // Пример отправки на тестовый endpoint (замените URL на свой сервер)
                 fetch('https://httpbin.org/post', {
                     method: 'POST',
@@ -1952,6 +1960,8 @@
                             input.style.borderColor = '#fff';
                             errorSpans[i].textContent = '';
                         });
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<p>ПОЛУЧИТЬ РЕЗУЛЬТАТ </p>';
                     })
                     .catch(error => {
                         document.getElementById('popup-content').innerHTML = `<h2>Ошибка отправки!</h2><p>Попробуйте позже.</p>`;
