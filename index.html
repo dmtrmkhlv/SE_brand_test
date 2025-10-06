@@ -346,6 +346,10 @@
             cursor: not-allowed;
         }
 
+        .button-next.submit p {
+            font-size: 15px;
+        }
+
         .button-next::before {
             content: "";
             background: #ffffff;
@@ -1134,6 +1138,20 @@
                 margin-top: 0;
             }
 
+            .right {
+                height: 100dvh;
+            }
+
+            .footer-right {
+                bottom: 10px;
+                position: fixed;
+            }
+
+            .button-next {
+                position: fixed;
+                bottom: 10px;
+            }
+
         }
     </style>
 </head>
@@ -1257,7 +1275,6 @@
                     Ваш браузер не поддерживает видео.
                 </video>
             </div>
-            <h1 class="mobile" id="archetype-title-mobile">ВЫ – АРХИТЕКТОР <br><span>(Элемент: Гора)</span></h1>
             <div class="result__box_item text">
                 <div id="archetype-desc">Вы лидер, который превращает хаос в порядок. Ваша миссия — создавать системы,
                     которые работают
@@ -1988,6 +2005,8 @@
                     .catch(error => {
                         document.getElementById('popup-content').innerHTML = `<h2>Ошибка отправки!</h2><p>Попробуйте позже.</p>`;
                         popup.style.display = 'flex';
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<p>ПОЛУЧИТЬ РЕЗУЛЬТАТ </p>';
                     });
             });
 
