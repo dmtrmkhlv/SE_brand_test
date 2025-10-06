@@ -1024,6 +1024,10 @@
                 position: relative;
                 display: flex;
                 justify-content: center;
+
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
             }
 
             .result__box_item {
@@ -1275,6 +1279,7 @@
                     Ваш браузер не поддерживает видео.
                 </video>
             </div>
+            <h1 class="mobile" id="archetype-title-mobile">ВЫ – АРХИТЕКТОР <br><span>(Элемент: Гора)</span></h1>
             <div class="result__box_item text">
                 <div id="archetype-desc">Вы лидер, который превращает хаос в порядок. Ваша миссия — создавать системы,
                     которые работают
@@ -1724,6 +1729,7 @@
             }
             const arch = archetypes[maxKey];
             document.getElementById('archetype-title').innerHTML = 'ВЫ – ' + arch.name + '<br><span>(Элемент: ' + arch.element + ')</span>';
+            document.getElementById('archetype-title-mobile').innerHTML = 'ВЫ – ' + arch.name + '<br><span>(Элемент: ' + arch.element + ')</span>';
             document.getElementById('archetype-desc').innerHTML = arch.desc;
             document.getElementById('strength').innerHTML = arch.strength;
             document.getElementById('growth').innerHTML = arch.growth;
