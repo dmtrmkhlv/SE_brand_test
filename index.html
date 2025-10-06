@@ -1315,22 +1315,19 @@
         let pageLoadedProgress = 0;
         let pageLoaded = false;
 
-        // Функция для обновления прогресс-бара
         function updateProgress(pagePercent, imagePercent, videoPercent) {
             const totalPercent = (pagePercent * 0.3333) + (imagePercent * 0.3333) + (videoPercent * 0.3333);
             document.getElementById('progress-fill').style.width = totalPercent + '%';
             document.getElementById('progress-text').innerText = Math.round(totalPercent) + '%';
         }
 
-        // Проверка, загружены ли все ресурсы
         function checkLoaded() {
             if (imageLoaded && videoLoaded && pageLoaded) {
                 document.getElementById('preloader').style.display = 'none';
-                loadQuestion(); // Показываем стартовую страницу
+                loadQuestion();
             }
         }
 
-        // Функция для предзагрузки одного изображения
         function preloadImage(src) {
             const img = document.createElement('img');
             img.src = src;
@@ -1340,7 +1337,6 @@
             return img;
         }
 
-        // Функция для предзагрузки одного видео
         function preloadVideo(src, callback) {
             const video = document.createElement('video');
             video.src = src;
@@ -1355,7 +1351,6 @@
             }
             return video;
         }
-
 
         const questions = [
             {
