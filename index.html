@@ -476,6 +476,10 @@
             left: 220px;
         }
 
+        .position5.mobile {
+            display: none;
+        }
+
         .intro_logo {
             position: absolute;
             top: calc((30 / 780) * 100%);
@@ -970,6 +974,27 @@
                 left: calc((0 / 320) * 100%);
             }
 
+            .position5.desktop {
+                display: none;
+            }
+
+            .position5.mobile {
+                display: block;
+            }
+
+            .result__box_item:first-child {
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            .result__box::before {
+                display: none;
+            }
+
+            #result .form-section {
+                width: 100%;
+            }
+
             .intro_logo {
                 position: absolute;
                 top: calc((39 / 600) * 100%);
@@ -1018,20 +1043,30 @@
                 position: absolute;
                 left: 50%;
                 transform: translateX(-50%);
+                top: calc((27 / 600) * 100%);
             }
 
             .result__box_item {
                 width: 100%;
             }
 
+            .bg-video {
+                min-height: calc(100% + 1px);
+            }
+
             .result__box_item.text {
                 border-right: unset;
-                border-bottom: 2px solid #ffffff;
+                border-bottom: 1px solid #ffffff;
                 padding: 0 0 24px 0;
                 box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
+            }
+
+            #result .strength,
+            #result .growth {
+                margin-top: 0px;
             }
 
             .result__box {
@@ -1234,7 +1269,7 @@
                 <button id="start-test" class="button-next">
                     <p>ПРОЙТИ ТЕСТ </p>
                 </button>
-                <div class="intro_block position5">
+                <div class="intro_block position5 desktop">
                     <div class="intro_block__text"></div>
                     <img class="intro_block__img" src="./img/poster_mini/6.png" alt="Intro Image">
                     <div class="intro_block__number">//05</div>
@@ -1250,11 +1285,11 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="intro_block position5">
+        <div class="intro_block position5 mobile">
             <div class="intro_block__text"></div>
             <img class="intro_block__img" src="./img/poster_mini/6.png" alt="Intro Image">
             <div class="intro_block__number">//05</div>
-        </div> -->
+        </div>
     </div>
 
     <div id="result" class="container" style="display: none;">
