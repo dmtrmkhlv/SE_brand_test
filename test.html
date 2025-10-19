@@ -185,7 +185,7 @@
         #quiz h1 p:first-of-type {
             padding: 0;
             margin: 0;
-            text-align: right;
+            /* text-align: right; */
         }
 
         .icon {
@@ -565,8 +565,9 @@
         }
 
         #result h1 {
-            margin-top: 127px;
+            margin-top: 83px;
             font-size: 40px;
+            margin-bottom: 35px;
         }
 
         #result .bg-video {
@@ -588,19 +589,37 @@
 
         .result__box {
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
             align-items: flex-start;
             gap: 52px;
+            position: relative;
+        }
+
+        .result__box::before {
+            position: absolute;
+            content: "";
+            width: 1px;
+            height: 100%;
+            background-color: #ffffff;
+            top: 0;
+            left: calc(58% + 50px);
+
+        }
+
+        .result__box_item:first-child {
+            width: 24%;
+            min-width: 24%;
         }
 
         .result__box_item {
-            width: 30%;
+            width: 34%;
         }
 
         .result__box_item.text {
-            border-right: 2px solid #ffffff;
-            padding: 0 52px 0 0;
+            /* border-right: 2px solid #ffffff; */
+            padding: 0 50px 0 0;
             box-sizing: border-box;
+            line-height: 1.2;
         }
 
         .result__box_item.text .strength p,
@@ -654,12 +673,25 @@
             box-sizing: border-box;
         }
 
+        #result .form-section {
+            width: 82%;
+        }
+
+        #result .form-section p {
+            text-transform: uppercase;
+        }
+
         #result h1.mobile {
             display: none;
         }
 
         #result h1.desktop {
             display: block;
+        }
+
+        #result .strength,
+        #result .growth {
+            margin-top: 34px;
         }
 
         #result form .form_item {
@@ -1131,27 +1163,27 @@
             <ul class="options">
                 <li class="option">
                     <div class="icon number"></div>
-                    <p id="option1"></p>
+                    <p id="option1" class="dangling"></p>
                 </li>
                 <li class="option">
                     <div class="icon number"></div>
-                    <p id="option2"></p>
+                    <p id="option2" class="dangling"></p>
                 </li>
                 <li class="option">
                     <div class="icon number"></div>
-                    <p id="option3"></p>
+                    <p id="option3" class="dangling"></p>
                 </li>
                 <li class="option">
                     <div class="icon number"></div>
-                    <p id="option4"></p>
+                    <p id="option4" class="dangling"></p>
                 </li>
                 <li class="option">
                     <div class="icon number"></div>
-                    <p id="option5"></p>
+                    <p id="option5" class="dangling"></p>
                 </li>
                 <li class="option">
                     <div class="icon number"></div>
-                    <p id="option6"></p>
+                    <p id="option6" class="dangling"></p>
                 </li>
             </ul>
             <button id="buttonNext" class="button-next">
@@ -1254,8 +1286,10 @@
             </div>
             <div class="result__box_item form">
                 <div class="form-section">
-                    <p>Оставьте ваши данные и скачайте результат в формате видео.</p><br>
-                    <p>Так вы сможете шеритьего в ваших социальных сетях!</p>
+                    <p>Оставьте свои данные и получите записи лекций с авторами курса «Креативное лидерство» – HRD
+                        Яндекса Дашей Золотухиной и сооснователем SETTERS Сашей Жарковой.</p><br>
+                    <p> На них вы узнаете, кто такой лидер будущего и как найти новые форматы лидерства, объединяющие
+                        систему, эмпатию и креативность.</p>
                     <form id="result-form" action="#" method="POST">
                         <div class="form_item">
                             <input name="name type=" text" placeholder="ИМЯ ФАМИЛИЯ">
@@ -1281,7 +1315,7 @@
         // Массив вопросов для теста, каждый вопрос содержит варианты для десктопа и мобайла
         const questions = [
             {
-                desktopTitle: 'В вашу команду<br>пришел новый<p><span style=" transform: translateX(-111px); display: inline-block; ">сотрудник.</span></p>Ваши <span>первые</span> действия:',
+                desktopTitle: 'В вашу команду<br>пришел новый<p><span style="user-select:none;color:#ffffff00">пришел новый</span><span style="display: inline-block; ">сотрудник.</span></p>Ваши <span>первые</span> действия:',
                 mobileTitle: 'В вашу команду<br>пришел новый<br><span>сотрудник.<br></span> Ваши <span>первые</span> действия:',
                 title: 'В вашу команду пришел новый сотрудник. Ваши первые действия:',
                 options: [
@@ -1294,7 +1328,7 @@
                 ]
             },
             {
-                desktopTitle: 'Команда столкнулась<br>с серьезной<p><span style=" transform: translateX(-111px); display: inline-block; ">проблемой</span></p>в проекте. Ваше<br><span>первое</span> действие:',
+                desktopTitle: 'Команда столкнулась<br>с серьезной<p><span style="user-select:none;color:#ffffff00">в проекте.Ваше</span><span style="display: inline-block; ">проблемой</span></p>в проекте. Ваше<br><span>первое</span> действие:',
                 mobileTitle: 'Команда столкнулась<br>с серьезной<br><span>проблемой</span><br>в проекте. Ваше<br><span>первое</span> действие:',
                 title: 'Команда столкнулась с серьезной проблемой в проекте. Ваше первое действие:',
                 options: [
@@ -1307,7 +1341,7 @@
                 ]
             },
             {
-                desktopTitle: 'При постановке<p><span style=" transform: translateX(-159px); display: inline-block; ">целей</span></p>команде <span>вы:</span>',
+                desktopTitle: 'При постановке<p><span style="user-select:none;color:#ffffff00">При постанов</span><span style="display: inline-block; ">целей</span></p>команде <span>вы:</span>',
                 mobileTitle: 'При постановке<br><span>целей</span> команде <span>вы:</span>',
                 title: 'При постановке целей команде вы:',
                 options: [
@@ -1320,7 +1354,7 @@
                 ]
             },
             {
-                desktopTitle: 'В вашем календаре<p><span style=" transform: translateX(-111px); display: inline-block; ">больше всего</span></p><span>времени</span> занимают:',
+                desktopTitle: 'В вашем календаре<p><span style="user-select:none;color:#ffffff00">В вашем ка</span> <span style="display: inline-block; ">больше всего</span></p><span>времени</span> занимают:',
                 mobileTitle: 'В вашем календаре<br><span>больше всего</span><br><span>времени</span> занимают:',
                 title: 'В вашем календаре больше всего времени занимают:',
                 options: [
@@ -1333,8 +1367,8 @@
                 ]
             },
             {
-                desktopTitle: 'Какого сотрудника<br>вы считаете<p><span style=" transform: translateX(-97px); display: inline-block; ">наиболее подходящим</span></p>для <span>вашей</span> команды?',
-                mobileTitle: 'Какого сотрудника<br>вы считаете<br><span>наиболее подходящим</span><br>для <span>вашей</span> команды?',
+                desktopTitle: 'Какого сотрудника<br>вы считаете<p><span style="user-select:none;color:#ffffff00">Для</span><span style=" display: inline-block; ">наиболее подходящим</span></p>для <span>вашей</span> команды:',
+                mobileTitle: 'Какого сотрудника<br>вы считаете<br><span>наиболее подходящим</span><br>для <span>вашей</span> команды:',
                 title: 'Какого сотрудника вы считаете наиболее подходящим для вашей команды?',
                 options: [
                     'Того, кто четко следует установленным правилам<br>и выдает качественный результат в срок',
@@ -1346,7 +1380,7 @@
                 ]
             },
             {
-                desktopTitle: 'В ситуации<p><span style=" transform: translateX(-121px); display: inline-block; ">неопределенности</span></p>вы:',
+                desktopTitle: 'В ситуации<p><span style="user-select:none;color:#ffffff00">В сит</span><span style=" display: inline-block; ">неопределенности</span></p>вы:',
                 mobileTitle: 'В ситуации<br><span>неопределенности</span><br>вы:',
                 title: 'В ситуации неопределенности вы:',
                 options: [
@@ -1359,7 +1393,7 @@
                 ]
             },
             {
-                desktopTitle: 'Ваш стиль<p><span style=" transform: translateX(-191px); display: inline-block; ">проведения</span></p>встреч:',
+                desktopTitle: 'Ваш стиль<p><span style="user-select:none;color:#ffffff00">Ваш с</span><span style=" display: inline-block; ">проведения</span></p>встреч:',
                 mobileTitle: 'Ваш стиль<br><span>проведения</span><br>встреч:',
                 title: 'Ваш стиль проведения встреч:',
                 options: [
@@ -1372,7 +1406,7 @@
                 ]
             },
             {
-                desktopTitle: 'Когда нужно<p><span style=" transform: translateX(-148px); display: inline-block; ">принять</span></p><span>сложное</span> решение, вы:',
+                desktopTitle: 'Когда нужно<p><span style="user-select:none;color:#ffffff00">Когда нужно</span><span style="  display: inline-block; ">принять</span></p><span>сложное</span> решение, вы:',
                 mobileTitle: 'Когда нужно<br><span>принять</span><br><span>сложное</span> решение, вы:',
                 title: 'Когда нужно принять сложное решение, вы:',
                 options: [
@@ -1385,7 +1419,7 @@
                 ]
             },
             {
-                desktopTitle: 'В стрессовой<p style=" transform: translateX(39px); display: inline-block; ">ситуации <span>вы ожидаете</span></p><br>от команды:',
+                desktopTitle: 'В стрессовой<p style=" display: inline-block; "><span style="user-select:none;color:#ffffff00">Вст</span>ситуации <span>вы ожидаете</span></p><br>от команды:',
                 mobileTitle: 'В стрессовой<p>ситуации <span>вы ожидаете</span></p>от команды:',
                 title: 'В стрессовой ситуации вы ожидаете от команды:',
                 options: [
@@ -1398,7 +1432,7 @@
                 ]
             },
             {
-                desktopTitle: 'Что мотивирует вас<p><span style=" transform: translateX(-111px); display: inline-block; ">больше всего</span></p>в работе руководителя:',
+                desktopTitle: 'Что мотивирует вас<p><span style="user-select:none;color:#ffffff00">Что мотивир</span><span style=" display: inline-block; ">больше всего</span></p>в работе <span>руководителя:</span>',
                 mobileTitle: 'Что мотивирует вас<br><span>больше всего</span><br>в работе руководителя:',
                 title: 'Что мотивирует вас больше всего в работе руководителя:',
                 options: [
@@ -1411,8 +1445,8 @@
                 ]
             },
             {
-                desktopTitle: 'Как вы видите<p><span style=" transform: translateX(-93px); display: inline-block; ">развитие сотрудников</span></p>в вашей команде?',
-                mobileTitle: 'Как вы видите<br><span>развитие сотрудников</span><br>в вашей команде?',
+                desktopTitle: 'Как вы видите<p><span style="user-select:none;color:#ffffff00">Как в</span><span style=" display: inline-block; ">развитие сотрудников</span></p>в вашей команде:',
+                mobileTitle: 'Как вы видите<br><span>развитие сотрудников</span><br>в вашей команде:',
                 title: 'Как вы видите развитие сотрудников в вашей команде?',
                 options: [
                     'Через систему: карьерные треки, цели, оценки,<br>понятные ожидания.',
@@ -1424,8 +1458,8 @@
                 ]
             },
             {
-                desktopTitle: 'Как вы обычно<p><span style=" transform: translateX(-124px); display: inline-block; ">проводите</span></p>ретроспективу <span>в команде</span>?',
-                mobileTitle: 'Как вы обычно<br><span>проводите</span><br>ретроспективу <br><span>в команде</span>?',
+                desktopTitle: 'Как вы обычно<p><span style="user-select:none;color:#ffffff00">Как вы обыч</span><span style=" display: inline-block; ">проводите</span></p>ретроспективу <span>в команде</span>:',
+                mobileTitle: 'Как вы обычно<br><span>проводите</span><br>ретроспективу <br><span>в команде</span>:',
                 title: 'Как вы обычно проводите ретроспективу в команде?',
                 options: [
                     'По заранее подготовленной структуре<br>и фиксируем все решения.',
@@ -1437,8 +1471,8 @@
                 ]
             },
             {
-                desktopTitle: 'Как вы решаете<p><span style=" transform: translateX(-129px); display: inline-block; ">конфликты</span></p>в команде?',
-                mobileTitle: 'Как вы решаете<br><span>конфликты</span><br>в команде?',
+                desktopTitle: 'Как вы решаете<p><span style="user-select:none;color:#ffffff00">Как вы реша</span><span style=" display: inline-block; ">конфликты</span></p>в команде:',
+                mobileTitle: 'Как вы решаете<br><span>конфликты</span><br>в команде:',
                 title: 'Как вы решаете конфликты в команде?',
                 options: [
                     'Ввожу правила, структурирую роли и зоны<br>ответственности.',
@@ -1450,8 +1484,8 @@
                 ]
             },
             {
-                desktopTitle: 'Что для вас — <span>главный</span><p style=" transform: translateX(94px); display: inline-block; "><span>результат</span> вашей</p><br>работы как лидера?',
-                mobileTitle: '<p class="leftP">Что для вас — <span>главный</span></p><span>результат</span> вашей<br>работы как лидера?',
+                desktopTitle: 'Что для вас — <span>главный</span><p style=" display: inline-block; "><span style="user-select:none;color:#ffffff00">Что для ва</span><span>результат</span> вашей</p><br>работы как лидера?:',
+                mobileTitle: '<p class="leftP">Что для вас — <span>главный</span></p><span>результат</span> вашей<br>работы как лидера?:',
                 title: 'Что для вас — главный результат вашей работы как лидера?',
                 options: [
                     'Когда всё работает без моего участия: процессы<br>отлажены, задачи идут по плану, команда автономна.',
@@ -1463,8 +1497,8 @@
                 ]
             },
             {
-                desktopTitle: 'Какую культуру вы<p style=" transform: translateX(33px); display: inline-block; "><span >стремитесь</span> выстроить</p><br>в своей команде?',
-                mobileTitle: 'Какую культуру вы<br><span>стремитесь</span> выстроить<br>в своей команде?',
+                desktopTitle: 'Какую культуру вы<p style=" display: inline-block; "><span style="user-select:none;color:#ffffff00">Как</span><span >стремитесь</span> выстроить</p><br>в своей команде:',
+                mobileTitle: 'Какую культуру вы<br><span>стремитесь</span> выстроить<br>в своей команде:',
                 title: 'Какую культуру вы стремитесь выстроить в своей команде?',
                 options: [
                     'Рациональную, организованную, с понятными<br>правилами и зонами ответственности.',
@@ -1739,6 +1773,15 @@
             localStorage.removeItem('answers');
         }
 
+        function preventHangingPrepositions() {
+            const elements = [...document.querySelectorAll('.dangling')];
+            const prepositions = /(?<!\p{L})(в|на|но|и|с|к|у|о|по|за|из|от|до|без|для|под|над)\s/giu;
+
+            elements.forEach(element => {
+                element.innerHTML = element.innerHTML.replace(prepositions, '$1&nbsp;');
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const video = document.querySelector('.bg-video');
             const poster = document.querySelector('.bg-poster');
@@ -1856,6 +1899,7 @@
             buttonNext.addEventListener('click', function () {
                 currentQuestion++;
                 loadQuestion();
+                preventHangingPrepositions();
             });
 
             // Кнопка "начать тест" — запускает первый вопрос
@@ -2051,6 +2095,7 @@
                         submitBtn.innerHTML = '<p>ПОЛУЧИТЬ РЕЗУЛЬТАТ </p>';
                     });
             });
+
 
         });
     </script>
